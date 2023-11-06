@@ -80,4 +80,4 @@ const uploadProfileImg = async (req, res, next) => {
   }
 };
 
-export { uploadProfileImg };
+export { storage, upload, uploadProfileImg };

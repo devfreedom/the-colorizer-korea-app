@@ -1,31 +1,33 @@
-import { UserModel } from "../schemas/userSchema";
+/** 
+ * Define DB CRUD models in an object-oriented way
+ * DB CRUD 모델을 객체지향적으로 정의합니다.
+ */
 
-// Define DB CRUD models in an object-oriented way
-// DB CRUD 모델을 객체지향적으로 정의합니다.
+import { UserModel } from "../schemas/userSchema.js";
 
 class User {
   static async create({ newUser }) {
-    const createdNewUser = await UserModel.create(newUser);
+    const createdNewUser = await UserModel.create({ newUser });
     return createdNewUser;
   }
 
   static async findByEmail({ email }) {
-    const user = await UserModel.findOne({ email });
-    return user;
+    const foundUser = await UserModel.findOne({ email });
+    return foundUser;
   }
 
-  static async findById({ user_id }) {
-    const user = await UserModel.findOne({ id: user_id });
-    return user;
+  static async findById({ userId }) {
+    const foundUser = await UserModel.findOne({ _id: userId });
+    return foundUser;
   }
 
   static async findAll() {
-    const users = await UserModel.find({});
-    return users;
+    const foundUsers = await UserModel.find({});
+    return foundUsers;
   }
 
-  static async update({ user_id, fieldToUpdate, newValue }) {
-    const filter = { id: user_id };
+  static async update({ userId, fieldToUpdate, newValue }) {
+    const filter = { _id: userId };
     const update = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
     const updatedUser = await UserModel.findOneAndUpdate(
@@ -36,8 +38,8 @@ class User {
     return updatedUser;
   }
 
-  static async delete({ user_id }) {
-    const user = await UserModel.findOneAndDelete({ id: user_id });
+  static async delete({ userId }) {
+    const user = await UserModel.findOneAndDelete({ _id: userId });
     return user;
   }
 }

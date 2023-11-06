@@ -1,14 +1,12 @@
 import express from "express";
 
-// Import 3rd-party libraries
-// 제3자 라이브러리들을 임포트합니다
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
-// Import in-house modules
-// 인하우스 모듈들을 임포트합니다
-import { userAuthRouter } from "./routers/userAuthRouter.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
+
+import { dbConnection } from "./db/connection.js";
+import { userAuthRouter } from "./routers/userAuthRouter.js";
 
 const app = express();
 
@@ -26,8 +24,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // Serve static files via path
 // 정적 파일을 서비스할 수 있게 경로를 지정해줍니다.
-app.use(express.static("/"));
+app.use(express.static(__dirname));
 
+dbConnection();
 
 app.get("/", (req, res) => {
   res.send(
@@ -36,7 +35,6 @@ app.get("/", (req, res) => {
      <h3>더 컬러라이저 코리아 웹앱 서버가 정상적으로 구동되고 있습니다.</h3></div>`
   );
 });
-
 
 // [주의] userAuthRouter는 가장 상단에, errorMiddleware는 가장 하단에 위치해야 합니다.
 // [CAUTION] userAuthRouter needs to be at the very top, while errorMiddleware needs to be at the very bottom.

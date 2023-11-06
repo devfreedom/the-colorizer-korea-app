@@ -1,9 +1,18 @@
 // import is from "@sindresorhus/is";
+
 import { Router } from "express";
+
+// Import middlewares
 import { loginValidator } from "../middlewares/loginValidator.js";
 import { routeSanitizer } from "../middlewares/routeSanitizer.js";
-// import { userAuthService } from "../services/userService";
-import { UserModel } from "../db";
+import { storage, upload, uploadProfileImg } from "../middlewares/profileImgUploader.js"
+
+// Import utilities
+
+// Import in-house modules
+import { User } from "../db/models/userModel.js";
+import { userAuthService } from "../services/userAuthService.js";
+
 
 const userAuthRouter = Router();
 
