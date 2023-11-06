@@ -6,4 +6,4 @@ import { body, param } from "express-validator";
 exports.routeSanitizer = [
   body('**').escape(),
   param('**').escape(),
-]
+];

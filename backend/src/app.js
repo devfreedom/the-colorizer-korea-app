@@ -7,10 +7,8 @@ import cors from "cors";
 
 // Import in-house modules
 // 인하우스 모듈들을 임포트합니다
-/*
-import { userAuthRouter } from "./routers/userRouter";
-import { errorMiddleware } from "./middlewares/errorMiddleware";
-*/
+import { userAuthRouter } from "./routers/userAuthRouter.js";
+import { errorHandler } from "./middlewares/errorHandler.js";
 
 const app = express();
 
@@ -30,19 +28,20 @@ app.use(express.urlencoded({ extended: true }));
 // 정적 파일을 서비스할 수 있게 경로를 지정해줍니다.
 app.use(express.static("/"));
 
-// 기본 페이지
+
 app.get("/", (req, res) => {
-  res.send(`<div style="font-family: sans-serif"><h3>The webapp server for The Colorizer Korea is running successfully.</h3><h3>더 컬러라이저 코리아 웹앱 서버가 정상적으로 구동되고 있습니다.</h3></div>`);
+  res.send(
+    `<div style="font-family: sans-serif">
+     <h3>The webapp server for The Colorizer Korea is running successfully.</h3>
+     <h3>더 컬러라이저 코리아 웹앱 서버가 정상적으로 구동되고 있습니다.</h3></div>`
+  );
 });
 
-/*
-// [주의] userAuthRouter는 가장 상단에 위치해야 합니다.
-// [CAUTION] userAuthRouter needs to be on top.
+
+// [주의] userAuthRouter는 가장 상단에, errorMiddleware는 가장 하단에 위치해야 합니다.
+// [CAUTION] userAuthRouter needs to be at the very top, while errorMiddleware needs to be at the very bottom.
 app.use(userAuthRouter);
 
-// [주의] errorMiddleware는 가장 하단에 위치해야 합니다.
-// [CAUTION] errorMiddleware needs to be at the bottom.
-app.use(errorMiddleware);
-*/
+app.use(errorHandler);
 
 export { app };
