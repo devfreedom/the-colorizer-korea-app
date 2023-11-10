@@ -7,8 +7,7 @@ require('dotenv').config({ path: envPath });
 
 const OAuth2 = google.auth.OAuth2;
 
-function nodeMailer({ newPassword }) {
-  // GMail API를 사용하기 위한 클라이언트를 설정합니다.
+const config = () => {
   const createTransporter = async () => {
     const oauth2Client = new OAuth2(
       process.env.CLIENT_ID,
@@ -51,6 +50,11 @@ function nodeMailer({ newPassword }) {
     rejectUnauthorized: false
   }
   */
+}
+
+function sendNewPassword({ newPassword }) {
+  // GMail API를 사용하기 위한 클라이언트를 설정합니다.
+  config();
 
   // 이메일을 전송하는 함수를 구현합니다.
   const sendEmail = async (emailOptions) => {
@@ -60,7 +64,7 @@ function nodeMailer({ newPassword }) {
 
   // 이메일을 실제로 전송합니다.
   sendEmail({
-    subject: "Here is your new password for The Colorizer Korea account.",
+    subject: "Here is the new password for your The Colorizer Korea account.",
     text: `The password reset you have requested has been done successfully. Please sign-in using this new password that we've generated for you : ${newPassword}`,
     to: inputEmail,
     from: process.env.EMAIL
@@ -68,3 +72,5 @@ function nodeMailer({ newPassword }) {
   
   return "Password reset email has been sent successfully.";
 }
+
+export { sendNewPassword };

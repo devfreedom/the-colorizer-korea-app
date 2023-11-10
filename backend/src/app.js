@@ -6,7 +6,7 @@ import cors from "cors";
 import { errorHandler } from "./middlewares/errorHandler.js";
 
 import { dbConnection } from "./db/connection.js";
-import { userAuthRouter } from "./routers/userAuthRouter.js";
+import { UserRouter } from "./routers/userRouter.js";
 
 const app = express();
 
@@ -36,9 +36,9 @@ app.get("/", (req, res) => {
   );
 });
 
-// [주의] userAuthRouter는 가장 상단에, errorMiddleware는 가장 하단에 위치해야 합니다.
-// [CAUTION] userAuthRouter needs to be at the very top, while errorMiddleware needs to be at the very bottom.
-app.use(userAuthRouter);
+// [주의] userRouter는 가장 상단에, errorMiddleware는 가장 하단에 위치해야 합니다.
+// [CAUTION] userRouter needs to be at the very top, while errorMiddleware needs to be at the very bottom.
+app.use(UserRouter);
 
 app.use(errorHandler);
 

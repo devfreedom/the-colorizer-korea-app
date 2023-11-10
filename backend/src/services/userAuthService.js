@@ -1,5 +1,0 @@
-const userAuthService = {
-
-}
-
-export { userAuthService }
