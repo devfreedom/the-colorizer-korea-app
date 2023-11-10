@@ -25,7 +25,7 @@ function loginValidator(req, res, next) {
   } catch (error) {
     console.log("An error has occured while validating the token.");
     res.status(400).send("Sign-in information is not valid. Please try signing in again.");
-    return;
+    return "An error has occured while validating the token.";
   }
 }
 
