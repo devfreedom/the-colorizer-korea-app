@@ -3,7 +3,8 @@ const fs = require('fs');
 const multer = require('multer');
 const randomstring = require("randomstring");
 
-// multer storage를 설정합니다.
+// [REFACTORED] Use memory storage instead of disk storage
+/*
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
     // [주의] path 모듈을 활용해 절대 경로를 기반으로 추가적인 상대 경로를 조합해주어야 합니다.
@@ -15,9 +16,12 @@ let storage = multer.diskStorage({
     cb(null, file.fieldname + "_" + randomstring.generate() + ".jpg")
   }
 })
+*/
 
-// multer upload를 설정합니다.
-// [보안] 업로드된 파일의 MIME type을 감지해서 JPEG 형식의 이미지 파일만 받아들입니다. 테스트 완료.
+let storage = multer.memoryStorage();
+
+// [SECURITY] Inspect the MIME type of the incoming file and authorize JPEG only
+// [보안] 업로드된 파일의 MIME type을 감지해서 JPEG 형식의 이미지 파일만 받아들입니다.
 let upload = multer({ 
   storage: storage,
   fileFilter: function (req, file, cb) {
@@ -61,6 +65,9 @@ const uploadProfileImg = async (req, res, next) => {
       throw new Error(uploadedFile.error);
     }
 
+    // [TO-DO] REFACTOR: Use memory storage 
+
+    /*
     // 파일이 정상적으로 DB에 저장이 되었다면 multer storage에 보관되어 있는 임시 파일을 삭제해줍니다.
     // 그렇지 않으면 임시 파일이 uploads 폴더에 계속 쌓이게 됩니다.
     // 파일 삭제에 사용되는 fs.unlink는 callback-style API이므로 결과를 적절하게 비동기적으로 핸들링해줍니다.
@@ -71,6 +78,7 @@ const uploadProfileImg = async (req, res, next) => {
           console.log("업로드된 임시 파일을 삭제했습니다.");
       }
     });
+    */
     
     res.status(200).json(imgBase64);
     return;

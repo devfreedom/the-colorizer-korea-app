@@ -3,7 +3,7 @@ import { Router } from "express";
 // Import middlewares
 import { loginValidator } from "../middlewares/loginValidator.js";
 import { routeSanitizer } from "../middlewares/routeSanitizer.js";
-import { storage, upload, uploadProfileImg } from "../middlewares/profileImgUploader.js"
+import { upload, uploadProfileImg } from "../middlewares/profileImgUploader.js"
 
 // Import in-house modules
 import { User } from "../db/models/userModel.js";
@@ -19,8 +19,8 @@ import {
   deleteUser
 } from "../controllers/userController.js";
 
-
 const UserRouter = Router();
+
 
 UserRouter.post(
   "/user/signup",

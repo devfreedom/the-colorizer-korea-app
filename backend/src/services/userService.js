@@ -58,7 +58,7 @@ class UserService {
 
     // 로그인 성공 -> JWT 웹 토큰 생성
     const secretKey = process.env.JWT_SECRET_KEY || "jwt-secret-key";
-    const token = jwt.sign({ user_id: user.id }, secretKey);
+    const token = jwt.sign({ user_id: user._id }, secretKey);
 
     // 반환할 loginUser 객체를 위한 변수 설정
     const id = user._id;
@@ -68,7 +68,7 @@ class UserService {
     const imgUrl = user.imgUrl;
 
     const loginUser = {
-      userid,
+      id,
       token,
       email,
       name,
@@ -164,8 +164,8 @@ class UserService {
     return user;
   }
 
-  static async getUserInfo({ user_id }) {
-    const user = await User.findById({ user_id });
+  static async getUserInfo({ id }) {
+    const user = await User.findById({ id });
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!user) {
@@ -199,7 +199,7 @@ class UserService {
     );
     const newHashedPassword = await bcrypt.hash(newPassword, 10)
 
-    const filter = { id: user.id };
+    const filter = { id: user._id };
     const update = { ["password"]: newHashedPassword };
     const option = { returnOriginal: false };
     const updatedUser = await UserModel.findOneAndUpdate(
@@ -263,7 +263,7 @@ class UserService {
       }
       console.log(`targetDocument: ${targetDocument}`)
       // [보안] 삭제를 요청한 사용자와, 계정 document의 소유자가 일치하는지를 validate 합니다.
-      if(currentUserId !== targetDocument.id){
+      if(currentUserId !== targetDocument._id){
         throw new Error("현재 로그인한 사용자는 사용자 계정 정보를 삭제할 권한이 없습니다.");
       }
 
@@ -320,7 +320,7 @@ class UserService {
         throw new Error("입력하신 이메일에 해당하는 계정 정보를 찾을 수 없습니다.");
       } 
 
-      const targetDocumentId = targetDocument['id'];
+      const targetDocumentId = targetDocument['_id'];
 
       /*
       [사용금지] 
