@@ -1,3 +1,5 @@
+import { UserService } from "../services/userService.js";
+
 // [CRUD] CREATE: Add new user account
 // [CRUD] CREATE: 사용자 계정 새로 만들기
 
@@ -24,7 +26,7 @@ const signupUser = async (req, res, next) => {
     }
 
     // 위 데이터를 유저 db에 추가하기
-    const newUser = await userAuthService.addUser({
+    const newUser = await UserService.addUser({
       name,
       email,
       password,
@@ -56,7 +58,7 @@ const loginUser = async (req, res, next) => {
     const password = req.body.password;
 
     // 위 데이터를 이용하여 유저 db에서 유저 찾기
-    const user = await userAuthService.getUser({ email, password });
+    const user = await UserService.getUser({ email, password });
 
     if (user.errorMessage) {
       throw new Error(user.errorMessage);
@@ -80,7 +82,7 @@ const getAllUsers = async (req, res, next) => {
     // server-side offset pagination을 위한 page와 limit의 초기값을 지정해주고, 쿼리 입력값을 반영해줍니다.
     const { page = 1, limit = 10 } = req.query;
      
-    const paginatedUsers = await userAuthService.getUsers(page, limit);
+    const paginatedUsers = await UserService.getUsers(page, limit);
 
     if (paginatedUsers.errorMessage) {
       throw new Error(paginatedUsers.errorMessage);
@@ -100,7 +102,7 @@ const getCurrentUser = async (req, res, next) => {
     // 
     // jwt토큰에서 추출된 사용자 id를 가지고 db에서 사용자 정보를 찾음.
     const user_id = req.currentUserId;
-    const currentUserInfo = await userAuthService.getUserInfo({
+    const currentUserInfo = await UserService.getCurrentUserInfo({
       user_id,
     });
 
@@ -118,7 +120,7 @@ const getCurrentUser = async (req, res, next) => {
 const getUser = async (req, res, next) => {
   try {
     const user_id = req.params.id;
-    const currentUserInfo = await userAuthService.getUserInfo({ user_id });
+    const currentUserInfo = await UserService.getUserInfo({ user_id });
 
     if (currentUserInfo.errorMessage) {
       throw new Error(currentUserInfo.errorMessage);
@@ -151,7 +153,7 @@ const updateUser = async (req, res, next) => {
     const toUpdate = { name, email, password, description, social, imgUrl };
 
     // 해당 사용자 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
-    const updatedUser = await userAuthService.setUser({ user_id, toUpdate });
+    const updatedUser = await UserService.setUser({ user_id, toUpdate });
 
     if (updatedUser.errorMessage) {
       throw new Error(updatedUser.errorMessage);
@@ -173,7 +175,7 @@ const changePassword = async (req, res, next) => {
     const currentPassword = req.body.currentPassword;
     const newPassword = req.body.newPassword;
     const newPasswordConfirm = req.body.newPasswordConfirm
-    const changedPassword = await userAuthService.setPassword({
+    const changedPassword = await UserService.setPassword({
       email, 
       currentPassword, 
       newPassword, 
@@ -205,7 +207,7 @@ const resetPassword = async (req, res, next) => {
     const inputEmail = req.body.inputEmail ?? null;
     const inputProof = req.body.inputProof ?? null;
 
-    const renewedPassword = await userAuthService.resetPassword({ inputEmail, inputProof });
+    const renewedPassword = await UserService.resetPassword({ inputEmail, inputProof });
 
     if (renewedPassword.error) {
       throw new Error(renewedPassword.error);
@@ -234,7 +236,7 @@ const deleteUser = async (req, res, next) => {
     const inputEmail = req.body.inputEmail ?? null;
     const inputPassword = req.body.inputPassword ?? null;
 
-    const deletedUser = await userAuthService.deleteUser({ 
+    const deletedUser = await UserService.deleteUser({ 
       currentUserId, 
       inputEmail, 
       inputPassword });

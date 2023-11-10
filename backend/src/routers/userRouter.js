@@ -1,100 +1,160 @@
-// import is from "@sindresorhus/is";
-
 import { Router } from "express";
 
 // Import middlewares
 import { loginValidator } from "../middlewares/loginValidator.js";
 import { routeSanitizer } from "../middlewares/routeSanitizer.js";
-import { storage, upload, uploadProfileImg } from "../middlewares/profileImgUploader.js"
-
-// Import utilities
+import { upload, uploadProfileImg } from "../middlewares/profileImgUploader.js"
 
 // Import in-house modules
 import { User } from "../db/models/userModel.js";
-import { userAuthService } from "../services/userAuthService.js";
+import { UserService } from "../services/userService.js";
+import {
+  signupUser,
+  loginUser,
+  getCurrentUser,
+  getUser,
+  updateUser,
+  changePassword,
+  resetPassword,
+  deleteUser
+} from "../controllers/userController.js";
+
+const UserRouter = Router();
 
 
-const userAuthRouter = Router();
-
-userAuthRouter.post(
-  "/user/signup", 
+UserRouter.post(
+  "/user/signup",
+  signupUser,
   async function (req, res, next) {
-  // signupUser
+    try{
+      
+    }
+    catch(error){
+      next(error);
+    }
 });
 
-userAuthRouter.post(
+UserRouter.post(
   "/user/login", 
+  loginUser,
   async function (req, res, next) {
-  // loginUser
+    try{
+
+    }
+    catch(error){
+      next(error);
+    }
 });
 
 /*
 [SUSPENDED] Business logic not yet implemented
 [일시중지] 적용할 비즈니스 로직이 아직 없습니다.
 
-userAuthRouter.get("/userlist", async function (req, res, next) {
+UserRouter.get("/userlist", async function (req, res, next) {
   // getAllUsers
 });
 */
 
-userAuthRouter.get(
+UserRouter.get(
   "/user/current",
   loginValidator,
+  getCurrentUser,
   async function (req, res, next) {
-  // getCurrentUser
+    try{
+
+    }
+    catch(error){
+      next(error);
+    }
 });
 
-userAuthRouter.get(
-  "/users/:userid",
-  loginValidator,
-  async function (req, res, next) {
-  // getUser
-});
-
-userAuthRouter.put(
+UserRouter.get(
   "/users/:userid",
   loginValidator,
   routeSanitizer,
+  getUser,
   async function (req, res, next) {
-  // updateUser
+    try{
+
+    }
+    catch(error){
+      next(error);
+    }
+});
+
+UserRouter.put(
+  "/users/:userid",
+  loginValidator,
+  routeSanitizer,
+  updateUser,
+  async function (req, res, next) {
+    try{
+
+    }
+    catch(error){
+      next(error);
+    }
 });
 
 
-userAuthRouter.put(
+UserRouter.put(
   "/user/:userid/password",
   loginValidator,
   routeSanitizer,
+  changePassword,
   async function (req, res, next) {
-  // changePassword
+    try{
 
+    }
+    catch(error){
+      next(error);
+    }
 });
 
 
-userAuthRouter.put(
+UserRouter.put(
   "/user/resetpassword", 
   loginValidator,
   routeSanitizer, 
+  resetPassword,
   async function (req, res, next) {
-  // resetPassword
+    try{
+
+    }
+    catch(error){
+      next(error);
+    }
 });
 
 
-userAuthRouter.delete(
+UserRouter.delete(
   "/user/deletion", 
   loginValidator, 
   routeSanitizer, 
+  deleteUser,
   async function (req, res, next) {
-  // deleteUser
+    try{
+
+    }
+    catch(error){
+      next(error);
+    }
 });
 
 // 현재 로그인한 사용자가 입력한 프로필 사진을 데이터베이스 업로드하고, 해당 사진의 base64 문자열과 MIME type으로 프론트엔드에 보내줍니다.
-userAuthRouter.post(
+UserRouter.post(
   "/user/:user_id/profileimg", 
   loginValidator,
   routeSanitizer,
+  uploadProfileImg,
   upload.single('file'), 
   async function (req, res, next) {
-  // profileImgUploader
+    try{
+
+    }
+    catch(error){
+      next(error);
+    }
 });
 
-export { userAuthRouter };
+export { UserRouter };
