@@ -27,16 +27,16 @@ import SignupPage from "./pages/SignupPage";
 
 function App() {
   
-  /** 현재 유저 정보를 userState 상태값으로 정의하고 */
+  /** 현재 유저 정보를 userState 상태값으로 정의하고 여기에 useReducer를 사용합니다. */
   const [userState, dispatch] = useReducer(userStateReducer, {
     user: null,
   });
 
-  /** 유저 정보를 받아오는 목업 API입니다.*/
+  /** 유저 정보를 데이터베이스에서 받아옵니다. */
   const fetchUserInfo = async () => {
     try {
       // 프론트엔드에서 보내주는 헤더에 있는 JWT 값으로 사용자를 판별합니다.
-      const endpoint = "/user/mypage";
+      const endpoint = "/users/mypage";
       const res = await Api.getData(endpoint);
       if (res.status === 200) {
         // dispatch 함수를 이용해 로그인 성공 신호와 사용자 정보를 상태값으로 저장합니다.
@@ -46,7 +46,7 @@ function App() {
         });
       }
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error.res.data);
     }
   };
 
@@ -57,8 +57,6 @@ function App() {
       fetchUserInfo();
     }
   }, []);
-
-
 
   return (
     <div>

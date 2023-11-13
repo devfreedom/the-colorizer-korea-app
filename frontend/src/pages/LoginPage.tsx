@@ -32,7 +32,6 @@ function LoginPage() {
 
     const endpoint = '/user/login';
 
-
     try {
       const res = await Api.postData({
         email: event.target.email.value,
