@@ -1,8 +1,12 @@
+// @ts-ignore
+// @ts-nocheck
+
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 
-import Header from "../components/Layout/Header";
-import Navbar from "../components/Layout/Navbar";
 import { useEffect } from 'react';
+
+import Header from "../components/layout/Header";
+import GeolocationToolbar from "../components/shared/GeolocationToolbar";
 
 const LayoutPage = () => {
 

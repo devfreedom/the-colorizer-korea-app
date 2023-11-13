@@ -1,24 +1,21 @@
-import * as React from 'react';
+// @ts-ignore
+// @ts-nocheck
+
+import React from 'react';
 import { useState, useContext, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-/*
 import UserStateContext from "../../contexts/UserStateContext";
 import DispatchContext from "../../contexts/DispatchContext";
-*/
 
 function Navbar() {
 
-  /*
   const dispatch = useContext(DispatchContext);
   const userState = useContext(UserStateContext);
-  */
 
-  let userState = {
-    user: "Logged in for testing"
-  }
+  const navigate = useNavigate();
 
-  const [isLoggedIn, setIsLoggedin] = React.useState(false);
+  const [isLoggedIn, setIsLoggedin] = useState(false);
 
   useEffect(() => {
     if(userState.user){
@@ -29,9 +26,7 @@ function Navbar() {
     }
   }, [userState])
 
-
   // NavLink 컴포넌트를 사용해서, 활성화된 메뉴에는 특정 class를 부여해 CSS style을 적용해줍니다.
-
   const activeStyle = 'mx-6 underline decoration-4 underline-offset-8';
   const inactiveStyle = 'mx-6'
 
@@ -79,15 +74,13 @@ function Navbar() {
     );
   }
 
-  const navigate = useNavigate();
-
   // 로그아웃 버튼을 클릭할 때 실행됩니다.
   const handleClick = () => {
     // sessionStorage에 저장되어있던 JWT Token을 삭제합니다.
     sessionStorage.removeItem("userToken");
     
     // dispatch 함수를 사용해 userState를 로그아웃 상태로 바꿔줍니다.
-    // dispatch({ type: "LOGOUT" });
+    dispatch({ type: "LOGOUT" });
 
     alert('You have successfully logged out.');
 
@@ -100,32 +93,39 @@ function Navbar() {
       <div className="flex flex-row w-full justify-between items-center px-2 font-bold text-md">
         <div>
           <NavLink 
-            to="/place" 
-            id="place-menu-btn" 
+            to="/places" 
+            id="places-menu-btn" 
             className={({ isActive, isPending }) => isPending ? inactiveStyle : isActive ? activeStyle : "mx-6"}
           >
             Places
           </NavLink>
           <NavLink 
-            to="/event" 
-            id="event-menu-btn" 
+            to="/events" 
+            id="events-menu-btn" 
             className={({ isActive, isPending }) => isPending ? inactiveStyle : isActive ? activeStyle : "mx-6"}
           >
             Events
           </NavLink>
           <NavLink 
-            to="/meetup" 
-            id="meetup-menu-btn" 
+            to="/meetups" 
+            id="meetups-menu-btn" 
             className={({ isActive, isPending }) => isPending ? inactiveStyle : isActive ? activeStyle : "mx-6"}
           >
             Meetups
           </NavLink>
           <NavLink 
-            to="/insight" 
-            id="insight-menu-btn" 
+            to="/insights" 
+            id="insights-menu-btn" 
             className={({ isActive, isPending }) => isPending ? inactiveStyle : isActive ? activeStyle : "mx-6"}
           >
-            Insight
+            Insights
+          </NavLink>
+          <NavLink 
+            to="/moments" 
+            id="moments-menu-btn" 
+            className={({ isActive, isPending }) => isPending ? inactiveStyle : isActive ? activeStyle : "mx-6"}
+          >
+            Moments
           </NavLink>
         </div>
         <div>
