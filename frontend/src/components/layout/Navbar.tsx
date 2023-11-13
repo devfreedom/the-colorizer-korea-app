@@ -1,11 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import { useState, useContext, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-/*
 import UserStateContext from "../../contexts/UserStateContext";
 import DispatchContext from "../../contexts/DispatchContext";
-*/
 
 function Navbar() {
 
@@ -100,32 +98,39 @@ function Navbar() {
       <div className="flex flex-row w-full justify-between items-center px-2 font-bold text-md">
         <div>
           <NavLink 
-            to="/place" 
-            id="place-menu-btn" 
+            to="/places" 
+            id="places-menu-btn" 
             className={({ isActive, isPending }) => isPending ? inactiveStyle : isActive ? activeStyle : "mx-6"}
           >
             Places
           </NavLink>
           <NavLink 
-            to="/event" 
-            id="event-menu-btn" 
+            to="/events" 
+            id="events-menu-btn" 
             className={({ isActive, isPending }) => isPending ? inactiveStyle : isActive ? activeStyle : "mx-6"}
           >
             Events
           </NavLink>
           <NavLink 
-            to="/meetup" 
-            id="meetup-menu-btn" 
+            to="/meetups" 
+            id="meetups-menu-btn" 
             className={({ isActive, isPending }) => isPending ? inactiveStyle : isActive ? activeStyle : "mx-6"}
           >
             Meetups
           </NavLink>
           <NavLink 
-            to="/insight" 
-            id="insight-menu-btn" 
+            to="/insights" 
+            id="insights-menu-btn" 
             className={({ isActive, isPending }) => isPending ? inactiveStyle : isActive ? activeStyle : "mx-6"}
           >
-            Insight
+            Insights
+          </NavLink>
+          <NavLink 
+            to="/moments" 
+            id="moments-menu-btn" 
+            className={({ isActive, isPending }) => isPending ? inactiveStyle : isActive ? activeStyle : "mx-6"}
+          >
+            Moments
           </NavLink>
         </div>
         <div>
