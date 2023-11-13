@@ -1,8 +1,15 @@
+// @ts-ignore
+// @ts-nocheck
+
 import React from 'react';
 import { useState, useReducer } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./index.css";
+
+import * as Api from "./apis/api";
+
+import userStateReducer from "./hooks/userStateReducer";
 
 // 웹앱의 전체 레이아웃을 정의하고 있는 페이지입니다.
 import LayoutPage from "./pages/LayoutPage";
@@ -19,6 +26,39 @@ import SignupPage from "./pages/SignupPage";
 */
 
 function App() {
+  
+  /** 현재 유저 정보를 userState 상태값으로 정의하고 */
+  const [userState, dispatch] = useReducer(userStateReducer, {
+    user: null,
+  });
+
+  /** 유저 정보를 받아오는 목업 API입니다.*/
+  const fetchUserInfo = async () => {
+    try {
+      // 프론트엔드에서 보내주는 헤더에 있는 JWT 값으로 사용자를 판별합니다.
+      const endpoint = "/user/mypage";
+      const res = await Api.getData(endpoint);
+      if (res.status === 200) {
+        // dispatch 함수를 이용해 로그인 성공 신호와 사용자 정보를 상태값으로 저장합니다.
+        dispatch({
+          type: "LOGIN_SUCCESS",
+          payload: res.data
+        });
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+
+  useEffect(() => {
+    console.log("--app mount--");
+    const token = sessionStorage.getItem("userToken");
+    if (token) {
+      fetchUserInfo();
+    }
+  }, []);
+
+
 
   return (
     <div>

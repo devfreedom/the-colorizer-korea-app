@@ -1,3 +1,6 @@
+// @ts-ignore
+// @ts-nocheck
+
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 
 import { useEffect } from 'react';
