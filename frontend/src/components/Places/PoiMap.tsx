@@ -11,6 +11,8 @@ import L, { MarkerCluster } from 'leaflet'
 // import MarkerClusterGroup from 'react-leaflet-cluster'
 // import 'leaflet/dist/leaflet.css'
 
+import currentPositionMarker from '../../assets/map/my-location.png';
+
 import CurrentDistrictContext from '../../contexts/CurrentDistrictContext';
 import CurrentPositionContext from "../../contexts/CurrentPositionContext";
 
@@ -37,7 +39,7 @@ function PoiMap() {
   */
 
   const newicon = new L.icon({
-    iconUrl: require("../../assets/map/my-location.png"),
+    iconUrl: currentPositionMarker,
     iconSize: [30, 30]
   });
 

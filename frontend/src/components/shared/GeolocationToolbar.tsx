@@ -1,6 +1,8 @@
 // @ts-ignore
 // @ts-nocheck
 
+import { useState } from 'react';
+
 import CurrentDistrictSelector from './CurrentDistrictSelector'
 import CurrentPosition from './CurrentPosition'
 

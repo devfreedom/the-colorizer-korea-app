@@ -36,7 +36,7 @@ const CurrentDistrictSelector = () => {
   return (
     <div className="flex flex-row items-center">
       <label className="mr-3">Province/Metro</label>
-      <select className="mr-3 rounded-lg p-1" name="district-selector" onChange={handleChange} value={currentDistrict}>
+      <select className="mr-3 rounded-lg p-1" name="district-selector" onChange={handleChangeSubdistrict} value={currentDistrict}>
         <option value="seoul">Seoul</option>
         <option value="gyeonggi">Gyeonggi</option>
         <option value="incheon">Incheon</option>
