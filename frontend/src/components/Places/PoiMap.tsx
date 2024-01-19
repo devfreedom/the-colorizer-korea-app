@@ -11,7 +11,7 @@ import L, { MarkerCluster } from 'leaflet'
 // import MarkerClusterGroup from 'react-leaflet-cluster'
 // import 'leaflet/dist/leaflet.css'
 
-import PoiScopeContext from '../../contexts/PoiScopeContext';
+import CurrentDistrictContext from '../../contexts/CurrentDistrictContext';
 import CurrentPositionContext from "../../contexts/CurrentPositionContext";
 
 // [참고사항] React-leaflet으로 바인딩된 Leaflet.js에서 필수적으로 요구하는 CSS 스타일은 Tailwind CSS가 아닌 /src/index.html를 통해서 가져옵니다.
@@ -42,7 +42,7 @@ function PoiMap() {
   });
 
   return(
-    <PoiScopeContext.Consumer>
+    <CurrentDistrictContext.Consumer>
       {PoiData => 
         <div id="map" className="flex flex-row items-center justify-center">
 
@@ -97,7 +97,7 @@ function PoiMap() {
           </MapContainer>
         </div>
       }
-    </PoiScopeContext.Consumer>
+    </CurrentDistrictContext.Consumer>
   )
 }
 

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { getData } from '../../apis/api';
 
 import PoiItem from './PoiItem'
-import PoiScopeContext from '../../contexts/PoiScopeContext';
+import CurrentDistrictContext from '../../contexts/CurrentDistrictContext';
 
 // PoiPage로부터 전달받은 handleState를 PoiItem까지 prop drilling 합니다.
 

@@ -11,7 +11,7 @@ import PoiDetails from "../components/Places/PoiDetails";
 
 import GeolocationToolbar from "../components/shared/GeolocationToolbar";
 
-import PoiScopeContext from "../contexts/PoiScopeContext";
+import CurrentDistrictContext from "../contexts/CurrentDistrictContext";
 import CurrentPositionContext from "../contexts/CurrentPositionContext";
 
 import * as Api from "../apis/api";
@@ -23,7 +23,7 @@ const PlacesPage = () => {
   // 특정 POI가 선택되었는지를 확인하는 상태값입니다.
   const [selectedPoi, setSelectedPoi] = useState();
 
-  // 자식 컴포넌트인 PoiList가 부모 컴포넌트인 PoiPage의 focusedPoi 상태값을 변경시킬 수 있도록 state handler를 사용합니다.
+  // 자식 컴포넌트인 PoiList가 부모 컴포넌트인 PlacesPage의 selectedPoi 상태값을 변경시킬 수 있도록 state handler를 사용합니다.
   // PoiList.js를 참고하세요.
   function handleSelectedPoiState(poi) {
     setSelectedPoi(poi);
@@ -38,17 +38,17 @@ const PlacesPage = () => {
     setLongitude(currentLongitude);
   }
 
-  // 사용자가 선택한 지역은 자식 컴포넌트인 DistrictSelector를 통해서 처리됩니다.
-  // 자식 컴포넌트인 DistrictSelector가 부모 컴포넌트인 PoiPage의 district 상태값을 변경시킬 수 있도록 state handler를 사용합니다.
-  // DistrictSelector.js를 참고하세요.
-  const [poiScope, setPoiScope] = useState("gangnam");
+  // 사용자가 선택한 지역은 자식 컴포넌트인 CurrentDistrictSelector를 통해서 처리됩니다.
+  // 자식 컴포넌트인 CurrentDistrictSelector가 부모 컴포넌트인 PlacesPage의 currentDistrict 상태값을 변경시킬 수 있도록 state handler를 사용합니다.
+  // CurrentDistrictSelector.tsx를 참고하세요.
+  const [currentDistrict, setCurrentDistrict] = useState("gangnam");
 
-  function handleCurrentPoiScopeState(selectedPoiScope) {
-    setCurrentPoiScope(selectedPoiScope);
+  function currentDistrictStateHandler(selectedCurrentDistrict) {
+    setCurrentDistrict(selectedCurrentDistrict);
   }
 
   // 사용자가 선택한 특정 지역의 POI 목록을 백엔드로부터 받아 상태값으로써 저장합니다.
-  const [districtPoiData, setDistrictPoiData] = useState([]);
+  const [scopedPoiData, setScopedPoiData] = useState([]);
 
   // 백엔드로부터 데이터를 받아오고 있는지를 체크하는 상태값입니다.
   const [isFetching, setIsFetching] = useState();
@@ -59,8 +59,8 @@ const PlacesPage = () => {
   // API 요청에 사용되는 endpoint를 지정해줍니다.
   const endpoint = "/places/cities";
 
-  // 사용자가 선택한 행정구역 정보를 담고 있는 poiScope 상태값을 라우팅 파라미터인 params로써 API 요청에 반영합니다.
-  const params = `/${poiScope}`;
+  // 사용자가 선택한 행정구역 정보를 담고 있는 currentDistrict 상태값을 라우팅 파라미터인 params로써 API 요청에 반영합니다.
+  const params = `/${currentDistrict}`;
 
   useEffect(() => {
     const fetchDistrictPoiData = async () => {
@@ -78,7 +78,7 @@ const PlacesPage = () => {
     };
 
     fetchDistrictPoiData();
-  }, [error, district]);
+  }, [error, currentDistrict]);
 
   if (isFetching || !districtPoiData) {
     return (

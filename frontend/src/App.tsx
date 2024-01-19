@@ -2,7 +2,7 @@
 // @ts-nocheck
 
 import React from 'react';
-import { useState, useReducer } from 'react';
+import { useEffect, useState, useReducer } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./index.css";
