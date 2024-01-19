@@ -13,6 +13,7 @@ import GeolocationToolbar from "../components/shared/GeolocationToolbar";
 
 import CurrentDistrictContext from "../contexts/CurrentDistrictContext";
 import CurrentPositionContext from "../contexts/CurrentPositionContext";
+import DistrictPoiDataContext from "../contexts/DistrictPoiDataContext";
 
 import * as Api from "../apis/api";
 
@@ -48,7 +49,7 @@ const PlacesPage = () => {
   }
 
   // 사용자가 선택한 특정 지역의 POI 목록을 백엔드로부터 받아 상태값으로써 저장합니다.
-  const [scopedPoiData, setScopedPoiData] = useState([]);
+  const [districtPoiData, setDistrictPoiData] = useState([]);
 
   // 백엔드로부터 데이터를 받아오고 있는지를 체크하는 상태값입니다.
   const [isFetching, setIsFetching] = useState();
