@@ -1,40 +1,19 @@
 import { Schema, model } from "mongoose";
 
-const UserSchema = new Schema(
+const PlacesSchema = new Schema(
   {
-    email: {
-      type: String,
-      required: true,
-    },
     name: {
       type: String,
       required: true,
     },
-    password: {
+    latitude: {
       type: String,
       required: true,
     },
-    bio: {
+    longitude: {
       type: String,
-      required: false,
-      default: "",
+      required: true,
     },
-    social: {
-      type: Object,
-      required: false,
-    },
-    imgUrl: {
-      type: String,
-      required: false,
-    },
-    imgBase64:{
-      type: String,
-      required: false,
-    },
-    isPasswordReset: {
-      type: Boolean,
-      required: false,
-    }
   },
   {
     timestamps: true,
@@ -49,8 +28,8 @@ const UserSchema = new Schema(
  * mongoose.explain(executionStats) 메서드를 사용해서 쿼리 결과값이 아닌 쿼리 '수행' 과정에 대한 자세한 정보를 얻을 수 있습니다.
  */
 
-User.index({ "email": 1 }, { "unique": true });
+User.index({ "name": 1 }, { "unique": true });
 
-const UserModel = model("User", UserSchema);
+const PlacesModel = model("Places", PlacesSchema);
 
-export { UserModel };
+export { PlacesModel };
