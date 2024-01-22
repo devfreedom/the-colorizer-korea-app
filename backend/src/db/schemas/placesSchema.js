@@ -6,6 +6,10 @@ const PlacesSchema = new Schema(
       type: String,
       required: true,
     },
+    address: {
+      type: String,
+      required: true,
+    },
     latitude: {
       type: String,
       required: true,
@@ -13,6 +17,46 @@ const PlacesSchema = new Schema(
     longitude: {
       type: String,
       required: true,
+    },
+    headline: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    business_hours: {
+      type: String,
+      required: true,
+    },
+    phone_no: {
+      type: String,
+      required: true,
+    },
+    website: {
+      type: String,
+      required: false,
+    },
+    social: {
+      type: Object,
+      required: false,
+    },
+    last_updated: {
+      type: String,
+      match: /^\d{4}-\d{2}-\d{2}$/  // Enforce YYYY-MM-DD date format constraint via RegEx
+    },
+    rating: {
+      type: Number,
+      required: false,
+    },
+    pricing: {
+      type: String,
+      required: false,
+    },
+    offers: {
+      type: Object,
+      required: false,
     },
   },
   {
