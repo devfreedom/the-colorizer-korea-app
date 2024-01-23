@@ -1,7 +1,7 @@
-import { PlacesModel } from "../db/schemas/placesSchema.js"
-import { Places } from "../db/models/placesModel.js"
+import { PoiModel } from "../db/schemas/poiSchema.js"
+import { Poi } from "../db/models/poiModel.js"
 
-class PlacesService {
+class PoiService {
   static async PLACEHOLDER({  }) {
 
     return;
@@ -10,4 +10,4 @@ class PlacesService {
 
 }
 
-export { PlacesService }
+export { PoiService }

@@ -21,7 +21,7 @@ import {
 
 const UserRouter = Router();
 
-
+// [CREATE] Create a new user account
 UserRouter.post(
   "/user/signup",
   signupUser,
@@ -34,6 +34,7 @@ UserRouter.post(
     }
 });
 
+// [CREATE] User sign in
 UserRouter.post(
   "/user/login", 
   loginUser,
@@ -55,6 +56,8 @@ UserRouter.get("/userlist", async function (req, res, next) {
 });
 */
 
+
+// [READ] Request the current logged-in user's account information
 UserRouter.get(
   "/user/current",
   loginValidator,
@@ -68,6 +71,7 @@ UserRouter.get(
     }
 });
 
+// [READ] Request a specific user's account information
 UserRouter.get(
   "/users/:userid",
   loginValidator,
@@ -82,6 +86,8 @@ UserRouter.get(
     }
 });
 
+
+// [UPDATE] Update the current logged-in user's account information
 UserRouter.put(
   "/users/:userid",
   loginValidator,
@@ -96,7 +102,7 @@ UserRouter.put(
     }
 });
 
-
+// [UPDATE] Change the current logged-in user's password
 UserRouter.put(
   "/user/:userid/password",
   loginValidator,
@@ -111,7 +117,7 @@ UserRouter.put(
     }
 });
 
-
+// [UPDATE] Reset the current logged-in user's password
 UserRouter.put(
   "/user/resetpassword", 
   loginValidator,
@@ -127,6 +133,7 @@ UserRouter.put(
 });
 
 
+// [DELETE] Delete the current logged-in user's account
 UserRouter.delete(
   "/user/deletion", 
   loginValidator, 
@@ -141,6 +148,10 @@ UserRouter.delete(
     }
 });
 
+
+// ----------
+
+// [CREATE] Upload the provided profile image to the database, and send the uploaded image (in base64) and its MIME type back to the client for confirmation.
 // 현재 로그인한 사용자가 입력한 프로필 사진을 데이터베이스 업로드하고, 해당 사진의 base64 문자열과 MIME type으로 프론트엔드에 보내줍니다.
 UserRouter.post(
   "/user/:user_id/profileimg", 

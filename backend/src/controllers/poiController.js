@@ -1,4 +1,4 @@
-import { PlacesService } from "../services/placesService.js";
+import { PoiService } from "../services/poiService.js";
 
 // [CRUD] CREATE:
 
