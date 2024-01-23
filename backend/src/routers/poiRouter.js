@@ -5,17 +5,31 @@ import { loginValidator } from "../middlewares/loginValidator.js";
 import { routeSanitizer } from "../middlewares/routeSanitizer.js";
 
 // Import in-house modules
-import { Places } from "../db/models/placesModel.js";
-import { PlacesService } from "../services/placesService.js";
+import { Poi } from "../db/models/poiModel.js";
+import { PoiService } from "../services/poiService.js";
 import {
   // placeholder1
 } from "../controllers/poiController.js";
 
 const PoiRouter = Router();
 
+// [READ] Request detailed information of a single specified POI
 PoiRouter.get(
-  "/user/signup",
-  // placeholder1,
+  "/places/:poino",
+  getPoiInfo,
+  async function (req, res, next) {
+    try{
+      
+    }
+    catch(error){
+      next(error);
+    }
+});
+
+// [READ] Request all POIs in the specified district, with concise information
+PoiRouter.get(
+  "/places/:district/",
+  getDistrictPoiList,
   async function (req, res, next) {
     try{
       
