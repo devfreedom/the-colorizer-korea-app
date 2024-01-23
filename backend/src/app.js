@@ -3,7 +3,15 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
+// Custom error handler for future use
+// 예비로 마련한 에러 핸들러
 import { errorHandler } from "./middlewares/errorHandler.js";
+
+// Use pino-http as a middleware for logging
+// 로깅을 위해 pino-http를 미들웨어로 사용합니다.
+import { pinoHttpLogger } from "./middlewares/logger.js"
+pinoHttpLogger();
+app.use(logger());
 
 import { dbConnection } from "./db/connection.js";
 import { UserRouter } from "./routers/userRouter.js";
@@ -27,6 +35,8 @@ app.use(express.urlencoded({ extended: true }));
 // 정적 파일을 서비스할 수 있게 경로를 지정해줍니다.
 app.use(express.static(__dirname));
 
+// Connect to the database
+// 데이터베이스에 접속합니다.
 dbConnection();
 
 app.get("/", (req, res) => {
@@ -40,6 +50,7 @@ app.get("/", (req, res) => {
 // [주의] userRouter는 가장 상단에, errorMiddleware는 가장 하단에 위치해야 합니다.
 // [CAUTION] userRouter needs to be at the very top, while errorMiddleware needs to be at the very bottom.
 app.use(UserRouter);
+app.use(PoiRouter);
 
 app.use(errorHandler);
 
