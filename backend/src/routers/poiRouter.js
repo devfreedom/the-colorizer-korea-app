@@ -9,11 +9,11 @@ import { Places } from "../db/models/placesModel.js";
 import { PlacesService } from "../services/placesService.js";
 import {
   // placeholder1
-} from "../controllers/placesController.js";
+} from "../controllers/poiController.js";
 
-const PlacesRouter = Router();
+const PoiRouter = Router();
 
-PlacesRouter.get(
+PoiRouter.get(
   "/user/signup",
   // placeholder1,
   async function (req, res, next) {
@@ -25,4 +25,4 @@ PlacesRouter.get(
     }
 });
 
-export { PlacesRouter };
+export { PoiRouter };

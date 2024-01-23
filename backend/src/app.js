@@ -7,6 +7,7 @@ import { errorHandler } from "./middlewares/errorHandler.js";
 
 import { dbConnection } from "./db/connection.js";
 import { UserRouter } from "./routers/userRouter.js";
+import { PoiRouter } from "./routers/poiRouter.js";
 
 const app = express();
 

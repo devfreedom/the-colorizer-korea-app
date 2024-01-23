@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const PlacesSchema = new Schema(
+const PoiSchema = new Schema(
   {
     name: {
       type: String,
@@ -74,6 +74,6 @@ const PlacesSchema = new Schema(
 
 User.index({ "name": 1 }, { "unique": true });
 
-const PlacesModel = model("Places", PlacesSchema);
+const PoiModel = model("Places", PoiSchema);
 
-export { PlacesModel };
+export { PoiModel };

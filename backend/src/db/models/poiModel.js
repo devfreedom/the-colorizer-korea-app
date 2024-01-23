@@ -3,7 +3,7 @@
  * DB CRUD 모델을 객체지향적으로 정의합니다.
  */
 
-import { PlacesModel } from "../schemas/placesSchema.js";
+import { PoiModel } from "../schemas/poiSchema.js";
 
 class Places {
   static async PLACEHOLDER({ placeholder }) {
