@@ -31,7 +31,7 @@ const LayoutPage = () => {
   }, []);
 
   useEffect(() => {
-    if (location.pathname === "/") navigate("/place");
+    if (location.pathname === "/") navigate("/places");
   }, [location]);
 
   return (

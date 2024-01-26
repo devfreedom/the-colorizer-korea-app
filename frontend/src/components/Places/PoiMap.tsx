@@ -14,6 +14,7 @@ import L, { MarkerCluster } from 'leaflet'
 import currentPositionMarker from '../../assets/map/my-location.png';
 
 import CurrentDistrictContext from '../../contexts/CurrentDistrictContext';
+import DistrictPoiDataContext from '../../contexts/DistrictPoiDataContext';
 import CurrentPositionContext from "../../contexts/CurrentPositionContext";
 
 // [참고사항] React-leaflet으로 바인딩된 Leaflet.js에서 필수적으로 요구하는 CSS 스타일은 Tailwind CSS가 아닌 /src/index.html를 통해서 가져옵니다.
@@ -43,8 +44,15 @@ function PoiMap() {
     iconSize: [30, 30]
   });
 
+  let PoiData = [{
+      id: 0,
+      latitude: "37.5642135", 
+      longitude: "127.0016985",
+      address: "ERROR_COULD_NOT_FETCH_POI_DATA",
+  }];
+
   return(
-    <CurrentDistrictContext.Consumer>
+    <DistrictPoiDataContext.Consumer>
       {PoiData => 
         <div id="map" className="flex flex-row items-center justify-center">
 
@@ -99,7 +107,7 @@ function PoiMap() {
           </MapContainer>
         </div>
       }
-    </CurrentDistrictContext.Consumer>
+    </DistrictPoiDataContext.Consumer>
   )
 }
 

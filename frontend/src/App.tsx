@@ -51,7 +51,7 @@ function App() {
   };
 
   useEffect(() => {
-    console.log("--app mount--");
+    console.log("App mounted, retrieving user token...");
     const token = sessionStorage.getItem("userToken");
     if (token) {
       fetchUserInfo();
