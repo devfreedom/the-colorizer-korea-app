@@ -71,7 +71,7 @@ function PoiMap() {
 
               {/* 백엔드로부터 받아온 POI 위치정보를 지도상에 마커로 표시합니다. */}
               {!PoiData
-                ? window.alert("ERROR: COULDN'T FETCH POI DATA")
+                ? window.alert("Error: Couldn't find point-of-interest data to show as markers.")
                 : PoiData.map(item => (
                   <Marker 
                     key={item.id} 
