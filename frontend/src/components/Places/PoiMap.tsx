@@ -70,23 +70,25 @@ function PoiMap() {
               iconCreateFunction={createClusterCustomIcon}> */}
 
               {/* 백엔드로부터 받아온 POI 위치정보를 지도상에 마커로 표시합니다. */}
-              {PoiData.map(item => (
-                <Marker 
-                  key={item.id} 
-                  position={[item.latitude, item.longitude]}
-                  eventHandlers={{
-                    click: (event) => {
-                      // [참고] 지도 위에 표시된 마커를 클릭하면, 해당 마커에 해당하는 POI를 목록의 최상단으로 올려줍니다. PoiItem.js를 참고하세요.
-                      window.location = `#${item.id}`
-                    },
-                  }}
-                >
-                  <Popup>
-                    <h1 className="font-bold">{item.name}</h1>
-                    <p>{`${item.address.split(' ')[0]} ${item.address.split(' ')[1]} ${item.address.split(' ')[2]}`}</p>
-                    <p>{item.poi_type}</p>
-                  </Popup>
-                </Marker>
+              {!PoiData
+                ? window.alert("ERROR: COULDN'T FETCH POI DATA")
+                : PoiData.map(item => (
+                  <Marker 
+                    key={item.id} 
+                    position={[item.latitude, item.longitude]}
+                    eventHandlers={{
+                      click: (event) => {
+                        // [참고] 지도 위에 표시된 마커를 클릭하면, 해당 마커에 해당하는 POI를 목록의 최상단으로 올려줍니다. PoiItem.js를 참고하세요.
+                        window.location = `#${item.id}`
+                      },
+                    }}
+                  >
+                    <Popup>
+                      <h1 className="font-bold">{item.name}</h1>
+                      <p>{`${item.address.split(' ')[0]} ${item.address.split(' ')[1]} ${item.address.split(' ')[2]}`}</p>
+                      <p>{item.poi_type}</p>
+                    </Popup>
+                  </Marker>
               ))}
 
             {/* </MarkerClusterGroup> */}

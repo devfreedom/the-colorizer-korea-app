@@ -16,7 +16,7 @@ const PoiRouter = Router();
 // [READ] Request detailed information of a single specified POI
 PoiRouter.get(
   "/places/:poino",
-  getPoiInfo,
+  // getPoiInfo,
   async function (req, res, next) {
     try{
       
@@ -29,7 +29,7 @@ PoiRouter.get(
 // [READ] Request all POIs in the specified district, with concise information
 PoiRouter.get(
   "/places/:district/",
-  getDistrictPoiList,
+  // getDistrictPoiList,
   async function (req, res, next) {
     try{
       

@@ -18,11 +18,15 @@ function Navbar() {
   const [isLoggedIn, setIsLoggedin] = useState(false);
 
   useEffect(() => {
-    if(userState.user){
-      setIsLoggedin(true);
+    if(!userState){
+      // exit if userState is null and inaccessible
+      return setIsLoggedin(false);
     }
     if(!userState.user){
       setIsLoggedin(false);
+    }
+    if(userState.user){
+      setIsLoggedin(true);
     }
   }, [userState])
 

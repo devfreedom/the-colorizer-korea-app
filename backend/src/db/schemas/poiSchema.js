@@ -72,7 +72,7 @@ const PoiSchema = new Schema(
  * mongoose.explain(executionStats) 메서드를 사용해서 쿼리 결과값이 아닌 쿼리 '수행' 과정에 대한 자세한 정보를 얻을 수 있습니다.
  */
 
-User.index({ "name": 1 }, { "unique": true });
+PoiSchema.index({ "name": 1 }, { "unique": true });
 
 const PoiModel = model("Places", PoiSchema);
 

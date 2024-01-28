@@ -7,17 +7,17 @@ import cors from "cors";
 // 예비로 마련한 에러 핸들러
 import { errorHandler } from "./middlewares/errorHandler.js";
 
-// Use pino-http as a middleware for logging
-// 로깅을 위해 pino-http를 미들웨어로 사용합니다.
-import { pinoHttpLogger } from "./middlewares/logger.js"
-pinoHttpLogger();
-app.use(logger());
-
 import { dbConnection } from "./db/connection.js";
+
 import { UserRouter } from "./routers/userRouter.js";
 import { PoiRouter } from "./routers/poiRouter.js";
 
 const app = express();
+
+// Use pino-http as a middleware for logging
+// 로깅을 위해 pino-http를 미들웨어로 사용합니다.
+const logger = require('pino-http');
+app.use(logger());
 
 // Use cors middleware to prevent CORS error
 // CORS 오류를 방지하기 위해 cors 미들웨어를 사용합니다.
