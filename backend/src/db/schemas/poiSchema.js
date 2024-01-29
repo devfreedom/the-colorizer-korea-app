@@ -18,6 +18,18 @@ const PoiSchema = new Schema(
       type: String,
       required: true,
     },
+    category: {
+      type: String,
+      required: true,
+    },
+    interest: {
+      type: String,
+      required: true,
+    },
+    tags: {
+      type: String,
+      required: false,
+    },
     headline: {
       type: String,
       required: true,
@@ -28,6 +40,14 @@ const PoiSchema = new Schema(
     },
     business_hours: {
       type: String,
+      required: true,
+    },
+    open_weekends: {
+      type: Number,
+      required: true,
+    },
+    open_at_night: {
+      type: Number,
       required: true,
     },
     phone_no: {
@@ -44,18 +64,18 @@ const PoiSchema = new Schema(
     },
     last_updated: {
       type: String,
-      match: /^\d{4}-\d{2}-\d{2}$/  // Enforce YYYY-MM-DD date format constraint via RegEx
+      match: /^\d{4}-\d{2}-\d{2}$/      // Enforce YYYY-MM-DD date format constraint via RegEx
     },
-    rating: {
-      type: Number,
-      required: false,
-    },
-    pricing: {
+    price_range: {
       type: String,
       required: false,
     },
-    offers: {
+    services: {
       type: Object,
+      required: false,
+    },
+    endorsed_by: {
+      type: String,
       required: false,
     },
   },
@@ -74,6 +94,6 @@ const PoiSchema = new Schema(
 
 PoiSchema.index({ "name": 1 }, { "unique": true });
 
-const PoiModel = model("Places", PoiSchema);
+const PoiModel = model("Poi", PoiSchema);
 
 export { PoiModel };
