@@ -14,6 +14,7 @@ import L, { MarkerCluster } from 'leaflet'
 import currentPositionMarker from '../../assets/map/my-location.png';
 
 import CurrentDistrictContext from '../../contexts/CurrentDistrictContext';
+import DistrictPoiDataContext from '../../contexts/DistrictPoiDataContext';
 import CurrentPositionContext from "../../contexts/CurrentPositionContext";
 
 // [참고사항] React-leaflet으로 바인딩된 Leaflet.js에서 필수적으로 요구하는 CSS 스타일은 Tailwind CSS가 아닌 /src/index.html를 통해서 가져옵니다.
@@ -43,8 +44,15 @@ function PoiMap() {
     iconSize: [30, 30]
   });
 
+  let PoiData = [{
+      id: 0,
+      latitude: "37.5642135", 
+      longitude: "127.0016985",
+      address: "ERROR_COULD_NOT_FETCH_POI_DATA",
+  }];
+
   return(
-    <CurrentDistrictContext.Consumer>
+    <DistrictPoiDataContext.Consumer>
       {PoiData => 
         <div id="map" className="flex flex-row items-center justify-center">
 
@@ -62,23 +70,25 @@ function PoiMap() {
               iconCreateFunction={createClusterCustomIcon}> */}
 
               {/* 백엔드로부터 받아온 POI 위치정보를 지도상에 마커로 표시합니다. */}
-              {PoiData.map(item => (
-                <Marker 
-                  key={item.id} 
-                  position={[item.latitude, item.longitude]}
-                  eventHandlers={{
-                    click: (event) => {
-                      // [참고] 지도 위에 표시된 마커를 클릭하면, 해당 마커에 해당하는 POI를 목록의 최상단으로 올려줍니다. PoiItem.js를 참고하세요.
-                      window.location = `#${item.id}`
-                    },
-                  }}
-                >
-                  <Popup>
-                    <h1 className="font-bold">{item.name}</h1>
-                    <p>{`${item.address.split(' ')[0]} ${item.address.split(' ')[1]} ${item.address.split(' ')[2]}`}</p>
-                    <p>{item.poi_type}</p>
-                  </Popup>
-                </Marker>
+              {!PoiData
+                ? window.alert("Error: Couldn't find point-of-interest data to show as markers.")
+                : PoiData.map(item => (
+                  <Marker 
+                    key={item.id} 
+                    position={[item.latitude, item.longitude]}
+                    eventHandlers={{
+                      click: (event) => {
+                        // [참고] 지도 위에 표시된 마커를 클릭하면, 해당 마커에 해당하는 POI를 목록의 최상단으로 올려줍니다. PoiItem.js를 참고하세요.
+                        window.location = `#${item.id}`
+                      },
+                    }}
+                  >
+                    <Popup>
+                      <h1 className="font-bold">{item.name}</h1>
+                      <p>{`${item.address.split(' ')[0]} ${item.address.split(' ')[1]} ${item.address.split(' ')[2]}`}</p>
+                      <p>{item.poi_type}</p>
+                    </Popup>
+                  </Marker>
               ))}
 
             {/* </MarkerClusterGroup> */}
@@ -99,7 +109,7 @@ function PoiMap() {
           </MapContainer>
         </div>
       }
-    </CurrentDistrictContext.Consumer>
+    </DistrictPoiDataContext.Consumer>
   )
 }
 

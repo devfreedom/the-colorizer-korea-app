@@ -5,12 +5,12 @@
 
 import { PoiModel } from "../schemas/poiSchema.js";
 
-class Places {
+class Poi {
   static async PLACEHOLDER({ placeholder }) {
-    const createdNewPlace = await UserModel.create({ newUser });
-    return createdNewUser;
+    const createdNewPoi = await PoiModel.create({ newPoi });
+    return createdNewPoi;
   }
 
 }
 
-export { Places };
+export { Poi };
