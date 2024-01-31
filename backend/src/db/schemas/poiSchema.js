@@ -2,10 +2,16 @@ import { Schema, model } from "mongoose";
 
 const PoiSchema = new Schema(
   {
+    index: {
+      type: Number,
+      required: true,
+    },
     name: {
       type: String,
       required: true,
     },
+
+    // Physical location attributes
     address: {
       type: String,
       required: true,
@@ -18,31 +24,37 @@ const PoiSchema = new Schema(
       type: String,
       required: true,
     },
-    category: {
+
+    // Business attributes
+    services: {
       type: String,
       required: true,
     },
-    interest: {
-      type: String,
-      required: true,
-    },
-    tags: {
+    amenities: {
       type: String,
       required: false,
     },
-    headline: {
-      type: String,
-      required: true,
+    price_range: {
+      type: Number,
+      required: false,
     },
-    description: {
+    multilingual: {
       type: String,
-      required: true,
+      required: false,
+    },
+    multicultural: {
+      type: String,
+      required: false,
+    },
+    nearby_transport: {
+      type: String,
+      required: false,
     },
     business_hours: {
       type: String,
       required: true,
     },
-    open_weekends: {
+    open_on_weekends: {
       type: Number,
       required: true,
     },
@@ -59,24 +71,60 @@ const PoiSchema = new Schema(
       required: false,
     },
     social: {
-      type: Object,
-      required: false,
+      facebook: {
+        type: String,
+        required: false,
+      },
+      instagram: {
+        type: String,
+        required: false,
+      },
+      x: {
+        type: String,
+        required: false,
+      },
+      youtube: {
+        type: String,
+        required: false,
+      },
+      other: {
+        type: String,
+        required: false,
+      }
     },
-    last_updated: {
+
+    // Descriptive attributes
+    headline: {
       type: String,
-      match: /^\d{4}-\d{2}-\d{2}$/      // Enforce YYYY-MM-DD date format constraint via RegEx
+      required: true,
     },
-    price_range: {
+    description: {
       type: String,
-      required: false,
+      required: true,
     },
-    services: {
-      type: Object,
+    category: {
+      type: String,
+      required: true,
+    },
+    subcategory: {
+      type: String,
+      required: true,
+    },
+    interest: {
+      type: String,
+      required: true,
+    },
+    tags: {
+      type: String,
       required: false,
     },
     endorsed_by: {
       type: String,
       required: false,
+    },
+    last_updated: {
+      type: String,
+      match: /^\d{4}-\d{2}-\d{2}$/      // Enforce YYYY-MM-DD date format constraint via RegEx
     },
   },
   {
