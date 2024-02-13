@@ -8,7 +8,7 @@ import { routeSanitizer } from "../middlewares/routeSanitizer.js";
 import { Poi } from "../db/models/poiModel.js";
 import { PoiService } from "../services/poiService.js";
 import {
-  // placeholder1
+  getDistrictPoiList,
 } from "../controllers/poiController.js";
 
 const PoiRouter = Router();
@@ -28,8 +28,8 @@ PoiRouter.get(
 
 // [READ] Request all POIs in the specified district, with concise information
 PoiRouter.get(
-  "/places/:district/",
-  // getDistrictPoiList,
+  "/api/places/:district/",
+  getDistrictPoiList,
   async function (req, res, next) {
     try{
       

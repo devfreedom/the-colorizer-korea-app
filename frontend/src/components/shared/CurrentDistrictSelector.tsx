@@ -5,52 +5,51 @@ import React from 'react';
 
 import { useState } from 'react';
 
-const CurrentDistrictSelector = () => {
+const CurrentDistrictSelector = ({handleCurrentDistrictState}) => {
 
-  const [currentDistrict, setCurrentDistrict] = useState('seoul');
+  const [selectedDistrict, setSelectedDistrict] = useState('seoul');
 
-  const [currentSubdistrict, setCurrentSubdistrict] = useState('gangnam');
+  const [selectedSubdistrict, setSelectedSubdistrict] = useState('gangnam');
 
   const handleChangeDistrict = (event) => {  
-    // [주의] useState는 비동기적입니다. 따라서 setState는 즉시 반환하게 됩니다. 상태값인 city는 다음 재렌더링때 바뀌게 됩니다.
+    // [주의] useState는 비동기적입니다. 따라서 setState는 즉시 반환하게 됩니다. 상태값인 selectedDistrict는 다음 재렌더링때 바뀌게 됩니다.
     //       따라서 그 전에 이렇게 별도의 변수로 먼저 저장해주면 사용자가 선택한 바로 그 순간의 값을 있는 그대로 전달해줄 수 있습니다.
     
-    const selectedDistrict = event.target.value;
+    const selectedDistrictValue = event.target.value;
 
     // 상위 행정구역을 currentDistrict 상태값으로 지정합니다.
-    setCurrentDistrict(event.target.value);
+    setSelectedDistrict(selectedDistrictValue);
   }
 
   const handleChangeSubdistrict = (event) => {
-    // [주의] useState는 비동기적입니다. 따라서 setState는 즉시 반환하게 됩니다. 상태값인 city는 다음 재렌더링때 바뀌게 됩니다.
+    // [주의] useState는 비동기적입니다. 따라서 setState는 즉시 반환하게 됩니다. 상태값인 selectedSubdistrict는 다음 재렌더링때 바뀌게 됩니다.
     //       따라서 그 전에 이렇게 별도의 변수로 먼저 저장해주면 사용자가 선택한 바로 그 순간의 값을 있는 그대로 전달해줄 수 있습니다.
     
-    const selectedSubdistrict = event.target.value;
-
+    const selectedSubdistrictValue = event.target.value;
     // 부모 컴포넌트인 GeolocationToolbar로부터 전달받은 handleCurrentDistrictState 함수를 사용해서,
     // 부모 컴포넌트의 currentDistrict 상태값을 현재 선택된 하위 행정구역으로 갱신합니다.
-    handleCurrentDistrictState(selectedSubdistrict);
+    handleCurrentDistrictState(selectedSubdistrictValue);
   }
 
   // Warning: Use the `defaultValue` or `value` props on <select> instead of setting `selected` on <option>.
   return (
     <div className="flex flex-row items-center">
-      <label className="mr-3">Province/Metro</label>
-      <select className="mr-3 rounded-lg p-1" name="district-selector" onChange={handleChangeSubdistrict} value={currentDistrict}>
-        <option value="seoul">Seoul</option>
-        <option value="gyeonggi">Gyeonggi</option>
-        <option value="incheon">Incheon</option>
-        <option value="gangwon" disabled>Gangwon</option>
-        <option value="chungbuk" disabled>Chungbuk</option>
-        <option value="chungnam" disabled>Chungnam</option>
-        <option value="jeonbuk" disabled>Jeonbuk</option>
-        <option value="jeonnam" disabled>Jeonnam</option>
-        <option value="gyeongbuk" disabled>Gyeongbuk</option>
-        <option value="gyeongnam" disabled>Gyeongnam</option>
-        <option value="jeju" disabled>Jeju</option>
-      </select>
+      <label className="mr-3">Explore where?</label>
+        <select className="mr-3 rounded-lg p-1" name="district-selector" onChange={handleChangeDistrict} value={selectedDistrict}>
+          <option value="seoul">Seoul</option>
+          <option value="gyeonggi">Gyeonggi</option>
+          <option value="incheon">Incheon</option>
+          <option value="gangwon" disabled>Gangwon</option>
+          <option value="chungbuk" disabled>Chungbuk</option>
+          <option value="chungnam" disabled>Chungnam</option>
+          <option value="jeonbuk" disabled>Jeonbuk</option>
+          <option value="jeonnam" disabled>Jeonnam</option>
+          <option value="gyeongbuk" disabled>Gyeongbuk</option>
+          <option value="gyeongnam" disabled>Gyeongnam</option>
+          <option value="jeju" disabled>Jeju</option>
+        </select>
       
-      {currentDistrict == 'seoul' &&
+      {selectedDistrict == 'seoul' &&
         <select className="rounded-lg p-1" name="subdistrict-selector-seoul" onChange={handleChangeSubdistrict}>
           <option>District</option>
             <optgroup label="Seoul-si">
@@ -83,10 +82,10 @@ const CurrentDistrictSelector = () => {
         </select>
       }
 
-      {currentDistrict == 'gyeonggi' &&
+      {selectedDistrict == 'gyeonggi' &&
         <select className="rounded-lg p-1" name="subdistrict-selector-gyeonggi" onChange={handleChangeSubdistrict}>
           <option>City</option>
-            <optgroup label="Gyeonggi Province">
+            <optgroup label="Gyeonggi-do">
               <option value="goyang">Goyang-si</option>
               <option value="gwacheon">Gwacheon-si</option>
               <option value="gwangmyeong">Gwangmyeong-si</option>
@@ -119,10 +118,10 @@ const CurrentDistrictSelector = () => {
         </select>
       }
 
-      {currentDistrict == 'incheon' &&
+      {selectedDistrict == 'incheon' &&
         <select className="rounded-lg p-1" name="subdistrict-selector-incheon" onChange={handleChangeSubdistrict}>
           <option disabled>District</option>
-            <optgroup label="Incheon Metropolitan City">
+            <optgroup label="Incheon-si">
               <option value="ganghwa">Gangwha-gun</option>
               <option value="gyeyang">Gyeyang-gu</option>
               <option value="namdong">Namdong-gu</option>

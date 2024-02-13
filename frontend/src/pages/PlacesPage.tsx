@@ -42,7 +42,7 @@ const PlacesPage = () => {
   // 사용자가 선택한 지역은 자식 컴포넌트인 CurrentDistrictSelector를 통해서 처리됩니다.
   // 자식 컴포넌트인 CurrentDistrictSelector가 부모 컴포넌트인 PlacesPage의 currentDistrict 상태값을 변경시킬 수 있도록 state handler를 사용합니다.
   // CurrentDistrictSelector.tsx를 참고하세요.
-  const [currentDistrict, setCurrentDistrict] = useState("gangnam");
+  const [currentDistrict, setCurrentDistrict] = useState("jung");
 
   function currentDistrictStateHandler(selectedCurrentDistrict) {
     setCurrentDistrict(selectedCurrentDistrict);
@@ -58,7 +58,7 @@ const PlacesPage = () => {
   const [error, setError] = useState();
 
   // API 요청에 사용되는 endpoint를 지정해줍니다.
-  const endpoint = "/places/cities";
+  const endpoint = "/api/places";
 
   // 사용자가 선택한 행정구역 정보를 담고 있는 currentDistrict 상태값을 라우팅 파라미터인 params로써 API 요청에 반영합니다.
   const params = `/${currentDistrict}`;
@@ -81,7 +81,7 @@ const PlacesPage = () => {
     fetchDistrictPoiData();
   }, [error, currentDistrict]);
 
-  if (isFetching || !districtPoiData) {
+  if (isFetching || !districtPoiData || districtPoiData == []) {
     return (
       <div className="flex flex-col w-full h-full justify-center items-center">
         <p className="font-bold text-lg">데이터를 가져오는 중입니다...</p>
@@ -105,7 +105,7 @@ const PlacesPage = () => {
             )}
           </div>
           <CurrentPositionContext.Provider value={[latitude, longitude]}>
-            <div id="poi-map" className="flex-1">
+            <div id="poi-map" className="flex-1 max-h-[calc(100vh-19rem)]">
               <PoiMap />
             </div>
           </CurrentPositionContext.Provider>

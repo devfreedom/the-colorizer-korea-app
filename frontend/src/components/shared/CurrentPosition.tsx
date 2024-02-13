@@ -6,7 +6,7 @@ import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 
-const CurrentPosition = ({handleState}) => {
+const CurrentPosition = ({handleLatLngState}) => {
 
   // 좌표값을 전역변수로 지정하는것은 안티패턴이므로 사용을 자제해야 합니다.
   // [REFACTORED] 좌표를 state로 저장합니다.
@@ -66,9 +66,9 @@ const CurrentPosition = ({handleState}) => {
       // 부모 컴포넌트인 PoiPage 및 자식 컴포넌트의 PoiMap의 latitude와 longitude 상태값을 갱신시켜 줍니다.
       // [주의] 만약 state handler가 setState가 있는 success() 내부에 있게 되면, 현재 위치가 최초로 파악된 경우에 새로 얻은 좌표값이 아닌 기본값(빈값)을 참조하게 되므로,
       //       현재의 위치 좌표가 최초로 파악되었을 경우 새로 얻은 좌표값이 반환할 수 있도록 별도의 useEffect를 사용해주어야 합니다.
-      handleState(receivedLatitude, receivedLongitude);
+      handleLatLngState(receivedLatitude, receivedLongitude);
     }
-  }, [receivedLatitude, receivedLongitude, handleState])
+  }, [receivedLatitude, receivedLongitude, handleLatLngState])
 
   
   return (

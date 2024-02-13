@@ -16,6 +16,14 @@ const PoiSchema = new Schema(
       type: String,
       required: true,
     },
+    district: {
+      type: String,
+      required: true,
+    },
+    subdistrict: {
+      type: String,
+      required: true,
+    },
     latitude: {
       type: String,
       required: true,
@@ -52,19 +60,19 @@ const PoiSchema = new Schema(
     },
     business_hours: {
       type: String,
-      required: true,
+      required: false,
     },
     open_on_weekends: {
       type: Number,
-      required: true,
+      required: false,
     },
     open_at_night: {
       type: Number,
-      required: true,
+      required: false,
     },
     phone_no: {
       type: String,
-      required: true,
+      required: false,
     },
     website: {
       type: String,
@@ -110,15 +118,7 @@ const PoiSchema = new Schema(
       type: String,
       required: true,
     },
-    interest: {
-      type: String,
-      required: true,
-    },
     tags: {
-      type: String,
-      required: false,
-    },
-    endorsed_by: {
       type: String,
       required: false,
     },
@@ -141,6 +141,11 @@ const PoiSchema = new Schema(
  */
 
 PoiSchema.index({ "name": 1 }, { "unique": true });
+
+// [REFERENCE] Mongoose ODM
+// The first argument is the singular name of the collection your model is for. 
+// Mongoose automatically looks for the plural, lowercased version of your model name.
+// Add the exact name of the collection as an extra argument in case of Mongoose not finding the collection.
 
 const PoiModel = model("Poi", PoiSchema);
 

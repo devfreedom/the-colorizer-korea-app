@@ -44,13 +44,6 @@ function PoiMap() {
     iconSize: [30, 30]
   });
 
-  let PoiData = [{
-      id: 0,
-      latitude: "37.5642135", 
-      longitude: "127.0016985",
-      address: "ERROR_COULD_NOT_FETCH_POI_DATA",
-  }];
-
   return(
     <DistrictPoiDataContext.Consumer>
       {PoiData => 
@@ -85,7 +78,7 @@ function PoiMap() {
                   >
                     <Popup>
                       <h1 className="font-bold">{item.name}</h1>
-                      <p>{`${item.address.split(' ')[0]} ${item.address.split(' ')[1]} ${item.address.split(' ')[2]}`}</p>
+                      <p>{`${item.address.split(', ')[0]} ${item.address.split(', ')[1]} ${item.address.split(', ')[2]}`}</p>
                       <p>{item.poi_type}</p>
                     </Popup>
                   </Marker>
