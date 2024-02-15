@@ -44,7 +44,7 @@ const PlacesPage = () => {
   // CurrentDistrictSelector.tsx를 참고하세요.
   const [currentDistrict, setCurrentDistrict] = useState("jung");
 
-  function currentDistrictStateHandler(selectedCurrentDistrict) {
+  function handleCurrentDistrictState(selectedCurrentDistrict) {
     setCurrentDistrict(selectedCurrentDistrict);
   }
 
@@ -94,7 +94,7 @@ const PlacesPage = () => {
     <DistrictPoiDataContext.Provider value={districtPoiData}>
       <div id="poi-page-wrapper" className="flex flex-col overflow-y-auto">
         <div className="flex-row">
-          <GeolocationToolbar />
+          <GeolocationToolbar handleCurrentDistrictState={handleCurrentDistrictState}/>
         </div>
         <div id="poi-content-wrapper" className="grow overflow-y-auto flex flex-row">
           <div id="poi-list" className="w-[30vw] max-h-[calc(100vh-8rem)] overflow-y-scroll scroll-smooth">
