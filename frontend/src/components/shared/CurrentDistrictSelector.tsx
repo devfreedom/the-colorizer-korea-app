@@ -5,11 +5,11 @@ import React from 'react';
 
 import { useState } from 'react';
 
-const CurrentDistrictSelector = ({handleCurrentDistrictState}) => {
+const CurrentDistrictSelector = ({handleCurrentDistrictState, currentRegion, currentDistrict}) => {
 
-  const [selectedRegion, setSelectedRegion] = useState('seoul');
+  const [selectedRegion, setSelectedRegion] = useState(currentRegion);
 
-  const [selectedDistrict, setSelectedDistrict] = useState('gangnam');
+  const [selectedDistrict, setSelectedDistrict] = useState(currentDistrict);
 
   const handleChangeRegion = (event) => {  
     // [주의] useState는 비동기적입니다. 따라서 setState는 즉시 반환하게 됩니다. 상태값인 selectedRegion는 다음 재렌더링때 바뀌게 됩니다.
@@ -21,13 +21,14 @@ const CurrentDistrictSelector = ({handleCurrentDistrictState}) => {
   }
 
   const handleChangeDistrict = (event) => {
-    // [주의] useState는 비동기적입니다. 따라서 setState는 즉시 반환하게 됩니다. 상태값인 selectedSubdistrict는 다음 재렌더링때 바뀌게 됩니다.
+    // [주의] useState는 비동기적입니다. 따라서 setState는 즉시 반환하게 됩니다. 상태값인 selectedDistrict는 다음 재렌더링때 바뀌게 됩니다.
     //       따라서 그 전에 이렇게 별도의 변수로 먼저 저장해주면 사용자가 선택한 바로 그 순간의 값을 있는 그대로 전달해줄 수 있습니다.
+    const selectedRegionValue = selectedRegion;
     const selectedDistrictValue = event.target.value;
 
     // 부모 컴포넌트인 GeolocationToolbar로부터 전달받은 handleCurrentDistrictState 함수를 사용해서,
     // 부모 컴포넌트의 currentDistrict 상태값을 현재 선택된 하위 행정구역으로 갱신합니다.
-    handleCurrentDistrictState(selectedDistrictValue);
+    handleCurrentDistrictState(selectedRegionValue, selectedDistrictValue);
   }
 
   // [REFACTOR] Use the `defaultValue` or `value` props on <select> instead of setting `selected` on <option>.

@@ -42,9 +42,11 @@ const PlacesPage = () => {
   // 사용자가 선택한 지역은 자식 컴포넌트인 CurrentDistrictSelector를 통해서 처리됩니다.
   // 자식 컴포넌트인 CurrentDistrictSelector가 부모 컴포넌트인 PlacesPage의 currentDistrict 상태값을 변경시킬 수 있도록 state handler를 사용합니다.
   // CurrentDistrictSelector.tsx를 참고하세요.
-  const [currentDistrict, setCurrentDistrict] = useState("jung");
+  const [currentRegion, setCurrentRegion] = useState("seoul");
+  const [currentDistrict, setCurrentDistrict] = useState("gangnam");
 
-  function handleCurrentDistrictState(selectedCurrentDistrict) {
+  function handleCurrentDistrictState(selectedCurrentRegion, selectedCurrentDistrict) {
+    setCurrentRegion(selectedCurrentRegion);
     setCurrentDistrict(selectedCurrentDistrict);
   }
 
@@ -93,7 +95,7 @@ const PlacesPage = () => {
   return (
     <div id="poi-page-wrapper" className="flex flex-col overflow-y-auto">
       <div className="flex-row">
-        <GeolocationToolbar handleCurrentDistrictState={handleCurrentDistrictState}/>
+        <GeolocationToolbar handleCurrentDistrictState={handleCurrentDistrictState} currentRegion={currentRegion} currentDistrict={currentDistrict}/>
       </div>
       <DistrictPoiDataContext.Provider value={districtPoiData}>
         <div id="poi-content-wrapper" className="grow overflow-y-auto flex flex-row">
