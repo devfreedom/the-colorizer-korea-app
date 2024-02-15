@@ -51,10 +51,6 @@ const UserSchema = new Schema(
 
 UserSchema.index({ "email": 1 }, { "unique": true });
 
-// [REFERENCE] Mongoose ODM
-// The first argument is the singular name of the collection your model is for. 
-// Mongoose automatically looks for the plural, lowercased version of your model name.
-
 const UserModel = model("User", UserSchema);
 
 export { UserModel };

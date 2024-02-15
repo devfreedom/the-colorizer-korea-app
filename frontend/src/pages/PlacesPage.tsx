@@ -99,9 +99,9 @@ const PlacesPage = () => {
         <div id="poi-content-wrapper" className="grow overflow-y-auto flex flex-row">
           <div id="poi-list" className="w-[30vw] max-h-[calc(100vh-19rem)] overflow-y-scroll scroll-smooth">
             {selectedPoi ? (
-              <PoiDetails stateHandler={handleSelectedPoiState} selectedPoi={selectedPoi} />
+              <PoiDetails handleSelectedPoiState={handleSelectedPoiState} selectedPoi={selectedPoi} />
             ) : (
-              <PoiList stateHandler={handleSelectedPoiState} />
+              <PoiList handleSelectedPoiState={handleSelectedPoiState} />
             )}
           </div>
           <CurrentPositionContext.Provider value={[latitude, longitude]}>

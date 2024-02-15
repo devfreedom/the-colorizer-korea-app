@@ -68,12 +68,12 @@ function PoiMap() {
                 ? window.alert("Error: Couldn't find point-of-interest data to show as markers.")
                 : PoiData.map(item => (
                   <Marker 
-                    key={item.id} 
+                    key={item.index} 
                     position={[item.latitude, item.longitude]}
                     eventHandlers={{
                       click: (event) => {
                         // [참고] 지도 위에 표시된 마커를 클릭하면, 해당 마커에 해당하는 POI를 목록의 최상단으로 올려줍니다. PoiItem.js를 참고하세요.
-                        window.location = `#${item.id}`
+                        window.location = `#${item.index}`
                       },
                     }}
                   >

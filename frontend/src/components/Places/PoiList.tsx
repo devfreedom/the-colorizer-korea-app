@@ -17,7 +17,7 @@ const PoiList = ({handleSelectedPoiState}) => {
     <DistrictPoiDataContext.Consumer>
       {poiData =>
         poiData.map(item => (
-         <PoiItem key={item.id} poiData={item} handleSelectedPoiState={handleSelectedPoiState} />
+         <PoiItem key={item.index} poiData={item} handleSelectedPoiState={handleSelectedPoiState} />
         ))
       }
     </DistrictPoiDataContext.Consumer>
