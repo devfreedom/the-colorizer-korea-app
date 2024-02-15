@@ -73,7 +73,7 @@ const PlacesPage = () => {
       } catch (err) {
         // 만약에 에러가 발생하게 되면 데이터 로딩 상황을 알려주는 placeholder 아래에 에러 메세지가 추가됩니다.
         setError(`${err.name} : ${err.message}`);
-        alert(`데이터를 가져오는 도중 에러가 발생했습니다: ${error}`);
+        alert(`An error has occured while fetching data: ${error}`);
         return;
       }
     };
@@ -84,7 +84,7 @@ const PlacesPage = () => {
   if (isFetching || !districtPoiData || districtPoiData == []) {
     return (
       <div className="flex flex-col w-full h-full justify-center items-center">
-        <p className="font-bold text-lg">데이터를 가져오는 중입니다...</p>
+        <p className="font-bold text-lg">Fetching data, please wait...</p>
         <p className="font-bold text-lg">{error}</p>
       </div>
     );

@@ -31,7 +31,7 @@ const CurrentPosition = ({handleLatLngState}) => {
   
   function error(err) {
     const errMsg = ["zero-filler", "PERMISSION_DENIED", "POSITION_UNAVAILABLE", "TIMEOUT"];
-    alert("현재 위치를 가져올 수 없습니다.\nERROR: " + errMsg[err.code]);
+    alert("Couldn't retrieve the current position.\nERROR: " + errMsg[err.code]);
     setIsActive(false);
   }
   
@@ -76,7 +76,7 @@ const CurrentPosition = ({handleLatLngState}) => {
       <button id="current-position-btn" 
               className={isActive ? `bg-green-400 px-3 py-1 rounded-xl` : `bg-white px-3 py-1 rounded-xl absolute right-4 bottom-0`}
               onClick={HandleToggle}>
-        {isActive ? `위치 표시 중...` : `현재 위치`}
+        {isActive ? `Showing current position...` : `Where am I?`}
       </button>
     </div>
   )

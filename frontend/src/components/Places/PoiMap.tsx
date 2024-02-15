@@ -92,9 +92,9 @@ function PoiMap() {
               {coordinate =>
                 <Marker position={[coordinate[0], coordinate[1]]} icon={newicon}>
                   <Popup>
-                    <h1 className="font-bold">마지막으로 파악된 현재 위치</h1>
-                    <p>위도: {coordinate[0]}</p>
-                    <p>경도: {coordinate[1]}</p>
+                    <h1 className="font-bold">Position Last Detected:</h1>
+                    <p>Latitude: {coordinate[0]}</p>
+                    <p>Longitude: {coordinate[1]}</p>
                   </Popup>
                 </Marker>
               }
