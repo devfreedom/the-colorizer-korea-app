@@ -57,17 +57,17 @@ const PlacesPage = () => {
   // 백엔드로부터 데이터를 받아오다가 오류가 발생했는지를 체크하는 상태값입니다.
   const [error, setError] = useState();
 
-  // API 요청에 사용되는 endpoint를 지정해줍니다.
-  const endpoint = "/api/places";
-
   // 사용자가 선택한 행정구역 정보를 담고 있는 currentDistrict 상태값을 라우팅 파라미터인 params로써 API 요청에 반영합니다.
-  const params = `/${currentDistrict}`;
+  const params = `${currentDistrict}`;
+
+  // API 요청에 사용되는 endpoint를 지정해줍니다.
+  const endpoint = `/api/districts/${params}/places`;
 
   useEffect(() => {
     const fetchDistrictPoiData = async () => {
       try {
         setIsFetching(true);
-        const res = await Api.getData(endpoint, params);
+        const res = await Api.getData(endpoint);
         setDistrictPoiData(res.data);
         setIsFetching(false);
       } catch (err) {

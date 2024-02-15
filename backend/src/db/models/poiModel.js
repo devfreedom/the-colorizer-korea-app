@@ -7,10 +7,13 @@ import { PoiModel } from "../schemas/poiSchema.js";
 
 class Poi {
   static async findAllPoiByDistrict(inputDistrict) {
-    console.log(inputDistrict)
-    const foundDistrictPoi = await PoiModel.find({ subdistrict: inputDistrict });
-    console.log(foundDistrictPoi)
-    return foundDistrictPoi;
+    const foundDistrictPois = await PoiModel.find({ subdistrict: inputDistrict });
+    return foundDistrictPois;
+  }
+
+  static async findPoiByIndex(inputIndex) {
+    const foundSinglePoi = await PoiModel.findOne({ index: inputIndex });
+    return foundSinglePoi;
   }
 }
 

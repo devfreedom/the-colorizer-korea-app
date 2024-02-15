@@ -122,9 +122,12 @@ const PoiSchema = new Schema(
       type: String,
       required: false,
     },
-    last_updated: {
+    last_update: {
       type: String,
-      match: /^\d{4}-\d{2}-\d{2}$/      // Enforce YYYY-MM-DD date format constraint via RegEx
+      /* 
+      Enforce YYYY-MM-DD date format constraint via RegEx
+      match: /^\d{4}-\d{2}-\d{2}$/
+      */      
     },
   },
   {
