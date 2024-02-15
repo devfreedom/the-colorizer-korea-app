@@ -105,7 +105,7 @@ const PlacesPage = () => {
             )}
           </div>
           <CurrentPositionContext.Provider value={[latitude, longitude]}>
-            <div id="poi-map" className="flex-1 max-h-[calc(100vh-19rem)]">
+            <div id="poi-map" className="flex-1 h-[100vh] max-h-[calc(100vh-19rem)]">
               <PoiMap />
             </div>
           </CurrentPositionContext.Provider>

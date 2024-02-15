@@ -13,13 +13,14 @@ const PoiItem = (props) => {
     <div id={props.poiData.id} className="flex flex-col">
       <div className="transition ease-in-out duration-300 hover:bg-slate-100 cursor-pointer p-4 " onClick={handleClick}>
         <h1 className="font-bold">{props.poiData.name}</h1>
+        <p className="">{props.poiData.headline}</p>
         <p className="">{props.poiData.address}</p>
-        <p className="">{props.poiData.poi_type}</p>
+        <span className="">{props.poiData.category} / </span><span className="">{props.poiData.subcategory}</span> 
         <div className="flex flex-row justify-between items-center">
           <div>
             {props.poiData.rating !==0 &&
               <>
-                <span className="mr-2">평점:</span><span className="">{props.poiData.rating}</span>
+                <span className="mr-2">Rating:</span><span className="">{props.poiData.rating}</span>
               </>
             }
           </div>

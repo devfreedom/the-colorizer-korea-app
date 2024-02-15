@@ -3,13 +3,15 @@
 
 import { React, useState } from 'react';
 
+// [WARNING] React-leaflet으로 바인딩된 Leaflet.js에서 필수적으로 요구하는 CSS 스타일은 Tailwind CSS가 아닌 /src/index.html를 통해서 가져옵니다.
+// import "leaflet/dist/leaflet.css";
+
 import { MapContainer } from 'react-leaflet/MapContainer'
 import { TileLayer } from 'react-leaflet/TileLayer'
 import { useMap } from 'react-leaflet/hooks'
 import { Map, Marker, Popup } from "react-leaflet";
 import L, { MarkerCluster } from 'leaflet'
 // import MarkerClusterGroup from 'react-leaflet-cluster'
-// import 'leaflet/dist/leaflet.css'
 
 import currentPositionMarker from '../../assets/map/my-location.png';
 
@@ -17,7 +19,6 @@ import CurrentDistrictContext from '../../contexts/CurrentDistrictContext';
 import DistrictPoiDataContext from '../../contexts/DistrictPoiDataContext';
 import CurrentPositionContext from "../../contexts/CurrentPositionContext";
 
-// [참고사항] React-leaflet으로 바인딩된 Leaflet.js에서 필수적으로 요구하는 CSS 스타일은 Tailwind CSS가 아닌 /src/index.html를 통해서 가져옵니다.
 function PoiMap() {
 
   /*
