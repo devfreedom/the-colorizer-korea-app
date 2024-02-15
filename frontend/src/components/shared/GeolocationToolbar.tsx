@@ -9,7 +9,7 @@ import CurrentPosition from './CurrentPosition'
 function GeolocationToolbar({handleCurrentDistrictState}) {
 
   // POI 쿼리의 기준이 될 하위 행정구역을 저장하는 상태값입니다.
-  const [currentDistrict, setCurrentDistrict] = useState('jung');
+  const [currentDistrict, setCurrentDistrict] = useState();
 
   // 현재 위치 좌표를 저장하는 상태값입니다.
   const [latitude, setLatitude] = useState("");

@@ -91,11 +91,11 @@ const PlacesPage = () => {
   }
 
   return (
-    <DistrictPoiDataContext.Provider value={districtPoiData}>
-      <div id="poi-page-wrapper" className="flex flex-col overflow-y-auto">
-        <div className="flex-row">
-          <GeolocationToolbar handleCurrentDistrictState={handleCurrentDistrictState}/>
-        </div>
+    <div id="poi-page-wrapper" className="flex flex-col overflow-y-auto">
+      <div className="flex-row">
+        <GeolocationToolbar handleCurrentDistrictState={handleCurrentDistrictState}/>
+      </div>
+      <DistrictPoiDataContext.Provider value={districtPoiData}>
         <div id="poi-content-wrapper" className="grow overflow-y-auto flex flex-row">
           <div id="poi-list" className="w-[30vw] max-h-[calc(100vh-8rem)] overflow-y-scroll scroll-smooth">
             {selectedPoi ? (
@@ -110,8 +110,9 @@ const PlacesPage = () => {
             </div>
           </CurrentPositionContext.Provider>
         </div>
-      </div>
-    </DistrictPoiDataContext.Provider>
+      </DistrictPoiDataContext.Provider>
+    </div>
+
   );
 };
 
