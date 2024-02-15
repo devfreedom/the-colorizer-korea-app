@@ -92,7 +92,7 @@ const PoiDetails = ({ handleSelectedPoiState, selectedPoi }) => {
           <p><span className="mr-2">Email:</span><span>{selectedPoiData.email}</span></p>
         </div>
       </div>
-
+      
       <div className="m-7">
         <p><span className="mr-2 text-slate-500">Last update: </span><span>{selectedPoiData.last_update.slice(0, 15)}</span></p>
       </div>

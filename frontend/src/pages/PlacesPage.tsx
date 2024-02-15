@@ -97,7 +97,7 @@ const PlacesPage = () => {
           <GeolocationToolbar />
         </div>
         <div id="poi-content-wrapper" className="grow overflow-y-auto flex flex-row">
-          <div id="poi-list" className="w-[30vw] max-h-[calc(100vh-19rem)] overflow-y-scroll scroll-smooth">
+          <div id="poi-list" className="w-[30vw] max-h-[calc(100vh-8rem)] overflow-y-scroll scroll-smooth">
             {selectedPoi ? (
               <PoiDetails handleSelectedPoiState={handleSelectedPoiState} selectedPoi={selectedPoi} />
             ) : (
@@ -105,7 +105,7 @@ const PlacesPage = () => {
             )}
           </div>
           <CurrentPositionContext.Provider value={[latitude, longitude]}>
-            <div id="poi-map" className="flex-1 h-[100vh] max-h-[calc(100vh-19rem)]">
+            <div id="poi-map" className="flex-1 overflow-y-auto">
               <PoiMap />
             </div>
           </CurrentPositionContext.Provider>

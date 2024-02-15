@@ -19,7 +19,6 @@ const getDistrictPoiList = async (req, res, next) => {
   try {
     const district = req.params.district;
     const result = await Poi.findAllPoiByDistrict(district);
-    console.log(result)
     res.status(200).json(result);
     return;
   } catch (error) {
@@ -32,7 +31,6 @@ const getPoiDetails = async (req, res, next) => {
   try {
     const poi = req.params.index;
     const result = await Poi.findPoiByIndex(poi);
-    console.log(result)
     res.status(200).json(result);
     return;
   } catch (error) {
