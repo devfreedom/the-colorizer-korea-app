@@ -5,7 +5,6 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const UserSchema = new Schema(
   {
-    // To prepare for migration to relational database, do not use MongoDB-only `_id` ObjectId as primary key.
     email: {
       type: String,
       required: true,

@@ -14,7 +14,7 @@ import {
 
 const PoiRouter = Router();
 
-// [READ] Request detailed information of a single specified POI
+// [CRUD] READ: Request detailed information of a single specified POI
 PoiRouter.get(
   "/api/places/:index",
   getPoiDetails,
@@ -27,7 +27,7 @@ PoiRouter.get(
     }
 });
 
-// [READ] Request all POIs in the specified district, with concise information
+// [CRUD] READ: Request all POIs in the specified district, with concise information
 PoiRouter.get(
   "/api/districts/:district/places",
   getDistrictPoiList,

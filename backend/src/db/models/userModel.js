@@ -6,6 +6,7 @@
 import { UserModel } from "../schemas/userSchema.js";
 
 class User {
+
   static async create({ newUser }) {
     const createdNewUser = await UserModel.create({ newUser });
     return createdNewUser;
@@ -42,6 +43,7 @@ class User {
     const user = await UserModel.findOneAndDelete({ _id: userId });
     return user;
   }
+  
 }
 
 export { User };
