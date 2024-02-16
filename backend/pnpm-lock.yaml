@@ -32,6 +32,9 @@ dependencies:
   mongoose:
     specifier: ^8.0.0
     version: 8.0.0
+  mongoose-sequence:
+    specifier: ^6.0.1
+    version: 6.0.1(mongoose@8.0.0)
   multer:
     specifier: 1.4.5-lts.1
     version: 1.4.5-lts.1
@@ -1453,6 +1456,10 @@ packages:
       is-shared-array-buffer: 1.0.2
     dev: true
 
+  /async@3.2.5:
+    resolution: {integrity: sha512-baNZyqaaLhyLVKm/DlvdW051MSgO6b8eVfIezl9E5PqWxFgzLm/wQntEW4zOytVburDEr0JlALEpdOFwvErLsg==}
+    dev: false
+
   /atomic-sleep@1.0.0:
     resolution: {integrity: sha512-kNOjDqAh7px0XWNI+4QbzoiR/nTkHAWNud2uvnJquD1/x5a7EQZMJT0AczqK0Qn67oY/TTQ1LbUKajZpp3I9tQ==}
     engines: {node: '>=8.0.0'}
@@ -2794,6 +2801,16 @@ packages:
       '@mongodb-js/saslprep': 1.1.1
       bson: 6.2.0
       mongodb-connection-string-url: 2.6.0
+    dev: false
+
+  /mongoose-sequence@6.0.1(mongoose@8.0.0):
+    resolution: {integrity: sha512-uXnLCW9pu2V49Xw8BmdXdeRugd2mv+ntu3nT2Bbm33pNRmmvHE2GKA+8BASKoQt960McLX4VL78wkb492f6MoQ==}
+    peerDependencies:
+      mongoose: '>=5'
+    dependencies:
+      async: 3.2.5
+      lodash: 4.17.21
+      mongoose: 8.0.0
     dev: false
 
   /mongoose@8.0.0:
