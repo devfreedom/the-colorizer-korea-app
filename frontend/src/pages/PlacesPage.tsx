@@ -42,9 +42,11 @@ const PlacesPage = () => {
   // 사용자가 선택한 지역은 자식 컴포넌트인 CurrentDistrictSelector를 통해서 처리됩니다.
   // 자식 컴포넌트인 CurrentDistrictSelector가 부모 컴포넌트인 PlacesPage의 currentDistrict 상태값을 변경시킬 수 있도록 state handler를 사용합니다.
   // CurrentDistrictSelector.tsx를 참고하세요.
+  const [currentRegion, setCurrentRegion] = useState("seoul");
   const [currentDistrict, setCurrentDistrict] = useState("gangnam");
 
-  function currentDistrictStateHandler(selectedCurrentDistrict) {
+  function handleCurrentDistrictState(selectedCurrentRegion, selectedCurrentDistrict) {
+    setCurrentRegion(selectedCurrentRegion);
     setCurrentDistrict(selectedCurrentDistrict);
   }
 
@@ -57,23 +59,23 @@ const PlacesPage = () => {
   // 백엔드로부터 데이터를 받아오다가 오류가 발생했는지를 체크하는 상태값입니다.
   const [error, setError] = useState();
 
-  // API 요청에 사용되는 endpoint를 지정해줍니다.
-  const endpoint = "/places/cities";
-
   // 사용자가 선택한 행정구역 정보를 담고 있는 currentDistrict 상태값을 라우팅 파라미터인 params로써 API 요청에 반영합니다.
-  const params = `/${currentDistrict}`;
+  const params = `${currentDistrict}`;
+
+  // API 요청에 사용되는 endpoint를 지정해줍니다.
+  const endpoint = `/api/districts/${params}/places`;
 
   useEffect(() => {
     const fetchDistrictPoiData = async () => {
       try {
         setIsFetching(true);
-        const res = await Api.getData(endpoint, params);
+        const res = await Api.getData(endpoint);
         setDistrictPoiData(res.data);
         setIsFetching(false);
       } catch (err) {
         // 만약에 에러가 발생하게 되면 데이터 로딩 상황을 알려주는 placeholder 아래에 에러 메세지가 추가됩니다.
         setError(`${err.name} : ${err.message}`);
-        alert(`데이터를 가져오는 도중 에러가 발생했습니다: ${error}`);
+        alert(`An error has occured while fetching data: ${error}`);
         return;
       }
     };
@@ -81,37 +83,38 @@ const PlacesPage = () => {
     fetchDistrictPoiData();
   }, [error, currentDistrict]);
 
-  if (isFetching || !districtPoiData) {
+  if (isFetching || !districtPoiData || districtPoiData == []) {
     return (
       <div className="flex flex-col w-full h-full justify-center items-center">
-        <p className="font-bold text-lg">데이터를 가져오는 중입니다...</p>
+        <p className="font-bold text-lg">Fetching data, please wait...</p>
         <p className="font-bold text-lg">{error}</p>
       </div>
     );
   }
 
   return (
-    <DistrictPoiDataContext.Provider value={districtPoiData}>
-      <div id="poi-page-wrapper" className="flex flex-col overflow-y-auto">
-        <div className="flex-row">
-          <GeolocationToolbar />
-        </div>
+    <div id="poi-page-wrapper" className="flex flex-col overflow-y-auto">
+      <div className="flex-row">
+        <GeolocationToolbar handleCurrentDistrictState={handleCurrentDistrictState} currentRegion={currentRegion} currentDistrict={currentDistrict}/>
+      </div>
+      <DistrictPoiDataContext.Provider value={districtPoiData}>
         <div id="poi-content-wrapper" className="grow overflow-y-auto flex flex-row">
-          <div id="poi-list" className="w-[30vw] max-h-[calc(100vh-19rem)] overflow-y-scroll scroll-smooth">
+          <div id="poi-list" className="w-[30vw] max-h-[calc(100vh-8rem)] overflow-y-scroll scroll-smooth">
             {selectedPoi ? (
-              <PoiDetails stateHandler={handleSelectedPoiState} selectedPoi={selectedPoi} />
+              <PoiDetails handleSelectedPoiState={handleSelectedPoiState} selectedPoi={selectedPoi} />
             ) : (
-              <PoiList stateHandler={handleSelectedPoiState} />
+              <PoiList handleSelectedPoiState={handleSelectedPoiState} />
             )}
           </div>
           <CurrentPositionContext.Provider value={[latitude, longitude]}>
-            <div id="poi-map" className="flex-1">
+            <div id="poi-map" className="flex-1 overflow-y-auto">
               <PoiMap />
             </div>
           </CurrentPositionContext.Provider>
         </div>
-      </div>
-    </DistrictPoiDataContext.Provider>
+      </DistrictPoiDataContext.Provider>
+    </div>
+
   );
 };
 

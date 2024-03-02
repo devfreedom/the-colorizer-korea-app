@@ -3,13 +3,15 @@
 
 import { React, useState } from 'react';
 
+// [WARNING] React-leaflet으로 바인딩된 Leaflet.js에서 필수적으로 요구하는 CSS 스타일은 Tailwind CSS가 아닌 /src/index.html를 통해서 가져옵니다.
+// import "leaflet/dist/leaflet.css";
+
 import { MapContainer } from 'react-leaflet/MapContainer'
 import { TileLayer } from 'react-leaflet/TileLayer'
 import { useMap } from 'react-leaflet/hooks'
 import { Map, Marker, Popup } from "react-leaflet";
 import L, { MarkerCluster } from 'leaflet'
 // import MarkerClusterGroup from 'react-leaflet-cluster'
-// import 'leaflet/dist/leaflet.css'
 
 import currentPositionMarker from '../../assets/map/my-location.png';
 
@@ -17,7 +19,6 @@ import CurrentDistrictContext from '../../contexts/CurrentDistrictContext';
 import DistrictPoiDataContext from '../../contexts/DistrictPoiDataContext';
 import CurrentPositionContext from "../../contexts/CurrentPositionContext";
 
-// [참고사항] React-leaflet으로 바인딩된 Leaflet.js에서 필수적으로 요구하는 CSS 스타일은 Tailwind CSS가 아닌 /src/index.html를 통해서 가져옵니다.
 function PoiMap() {
 
   /*
@@ -44,13 +45,6 @@ function PoiMap() {
     iconSize: [30, 30]
   });
 
-  let PoiData = [{
-      id: 0,
-      latitude: "37.5642135", 
-      longitude: "127.0016985",
-      address: "ERROR_COULD_NOT_FETCH_POI_DATA",
-  }];
-
   return(
     <DistrictPoiDataContext.Consumer>
       {PoiData => 
@@ -74,18 +68,18 @@ function PoiMap() {
                 ? window.alert("Error: Couldn't find point-of-interest data to show as markers.")
                 : PoiData.map(item => (
                   <Marker 
-                    key={item.id} 
+                    key={item.index} 
                     position={[item.latitude, item.longitude]}
                     eventHandlers={{
                       click: (event) => {
                         // [참고] 지도 위에 표시된 마커를 클릭하면, 해당 마커에 해당하는 POI를 목록의 최상단으로 올려줍니다. PoiItem.js를 참고하세요.
-                        window.location = `#${item.id}`
+                        window.location = `#${item.index}`
                       },
                     }}
                   >
                     <Popup>
                       <h1 className="font-bold">{item.name}</h1>
-                      <p>{`${item.address.split(' ')[0]} ${item.address.split(' ')[1]} ${item.address.split(' ')[2]}`}</p>
+                      <p>{`${item.address.split(', ')[0]} ${item.address.split(', ')[1]} ${item.address.split(', ')[2]}`}</p>
                       <p>{item.poi_type}</p>
                     </Popup>
                   </Marker>
@@ -98,9 +92,9 @@ function PoiMap() {
               {coordinate =>
                 <Marker position={[coordinate[0], coordinate[1]]} icon={newicon}>
                   <Popup>
-                    <h1 className="font-bold">마지막으로 파악된 현재 위치</h1>
-                    <p>위도: {coordinate[0]}</p>
-                    <p>경도: {coordinate[1]}</p>
+                    <h1 className="font-bold">Position Last Detected:</h1>
+                    <p>Latitude: {coordinate[0]}</p>
+                    <p>Longitude: {coordinate[1]}</p>
                   </Popup>
                 </Marker>
               }

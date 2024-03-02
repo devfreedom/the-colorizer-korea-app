@@ -6,11 +6,17 @@
 import { PoiModel } from "../schemas/poiSchema.js";
 
 class Poi {
-  static async PLACEHOLDER({ placeholder }) {
-    const createdNewPoi = await PoiModel.create({ newPoi });
-    return createdNewPoi;
+
+  static async findByDistrict(inputDistrict) {
+    const foundDistrictPois = await PoiModel.find({ subdistrict: inputDistrict });
+    return foundDistrictPois;
   }
 
+  static async findByIndex(inputIndex) {
+    const foundSinglePoi = await PoiModel.findOne({ index: inputIndex });
+    return foundSinglePoi;
+  }
+  
 }
 
 export { Poi };

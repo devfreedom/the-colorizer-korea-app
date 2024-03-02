@@ -1,5 +1,8 @@
 import { Schema, model } from "mongoose";
 
+const mongoose = require('mongoose')
+const AutoIncrement = require('mongoose-sequence')(mongoose);
+
 const UserSchema = new Schema(
   {
     email: {
@@ -40,6 +43,10 @@ const UserSchema = new Schema(
     timestamps: true,
   }
 );
+
+// Use `id` field with auto-incrementing sequential numbers as a unique user identifier, which is created and managed by mongoose-sequence.
+UserSchema.plugin(AutoIncrement, { inc_field: 'id' });
+
 
 /** 
  * Activate indexing for better performance with IXSCAN query strategy

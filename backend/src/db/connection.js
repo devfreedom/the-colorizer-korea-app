@@ -6,14 +6,12 @@ require('dotenv').config({ path: envPath });
 
 function dbConnection() {
   
-  /*
   const URL =
     process.env.MONGODB_URI || 
     `null (connection string is missing)`;
-  */
 
-  // Local development for now
-  const URL = "mongodb://localhost:27017"
+  // Local development
+  // const URL = "mongodb://localhost:27017"
 
   mongoose.connect(URL);
   const db = mongoose.connection;

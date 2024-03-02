@@ -8,15 +8,16 @@ import { routeSanitizer } from "../middlewares/routeSanitizer.js";
 import { Poi } from "../db/models/poiModel.js";
 import { PoiService } from "../services/poiService.js";
 import {
-  // placeholder1
+  getDistrictPoiList,
+  getPoiDetails,
 } from "../controllers/poiController.js";
 
 const PoiRouter = Router();
 
-// [READ] Request detailed information of a single specified POI
+// [CRUD] READ: Request detailed information of a single specified POI
 PoiRouter.get(
-  "/places/:poino",
-  // getPoiInfo,
+  "/api/places/:index",
+  getPoiDetails,
   async function (req, res, next) {
     try{
       
@@ -26,10 +27,10 @@ PoiRouter.get(
     }
 });
 
-// [READ] Request all POIs in the specified district, with concise information
+// [CRUD] READ: Request all POIs in the specified district, with concise information
 PoiRouter.get(
-  "/places/:district/",
-  // getDistrictPoiList,
+  "/api/districts/:district/places",
+  getDistrictPoiList,
   async function (req, res, next) {
     try{
       
